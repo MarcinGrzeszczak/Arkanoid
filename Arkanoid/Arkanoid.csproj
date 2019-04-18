@@ -63,6 +63,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GameLogic\Collisions.cs" />
     <Compile Include="GameLogic\Game.cs" />
     <Compile Include="GameLogic\GameCanvas.cs" />
     <Compile Include="GameLogic\GameController.cs" />

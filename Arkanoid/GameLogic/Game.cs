@@ -2,6 +2,7 @@
 using Arkanoid.GameObjects;
 using System;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace Arkanoid
@@ -11,15 +12,17 @@ namespace Arkanoid
         private GameCanvas gameCanvas;
         private GameState gameState;
         private GameController controller;
+        
         public Game(double width, double height, GameController controller)
         {
             this.controller = controller;
 
             //TODO: Usunac tworzenie levelu z konstruktora
             GameLevel level = new GameLevel();
+            
             level.randomLevel();
-
-            gameState = new GameState();
+            Collisions collisions = new Collisions(new Rect(0,0,width,height));
+            gameState = new GameState(collisions);
             gameState.load(level);
 
             gameCanvas = new GameCanvas(draw);

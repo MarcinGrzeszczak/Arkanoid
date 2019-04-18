@@ -41,6 +41,7 @@ namespace Arkanoid.GameObjects
 
             acceleration[0] = speedX;
             acceleration[1] = speedY;
+            updatePosition();
         }
     }
 }

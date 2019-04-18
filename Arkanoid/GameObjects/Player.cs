@@ -5,7 +5,7 @@ namespace Arkanoid.GameObjects
 {
     class Player : MovingGameObject
     {
-        private static double DEFAULT_SPEED = 4;
+        public static double DEFAULT_SPEED = 4;
         public static Point DEFAULT_SIZE = new Point(100, 20);
         public Player(Point size, Point position) : base(size, position) {
             init();
@@ -13,6 +13,17 @@ namespace Arkanoid.GameObjects
 
         public Player(Point position) : base(DEFAULT_SIZE, position) {
             init();
+        }
+
+        public static MoveDir movementWrapper(bool isPressedLeft, bool isPressedRight)
+        {
+            MoveDir movement;
+            movement.left = isPressedLeft;
+            movement.right = isPressedRight;
+            movement.up = false;
+            movement.down = false;
+
+            return movement;
         }
 
         private void init() {
