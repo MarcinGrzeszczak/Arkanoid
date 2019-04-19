@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
 
 namespace Arkanoid.GameObjects
@@ -42,34 +43,28 @@ namespace Arkanoid.GameObjects
             dc.DrawEllipse(brush, null, position, size.X, size.Y);
         }
 
-        public override void update(double delta, MoveDir moveFlags)
+        public void bounce(Collision collision) {
+            switch (collision){
+                case Collision.LEFT: updateXaxisMovement(false, true); break;
+                case Collision.RIGHT: updateXaxisMovement(true, false); break;
+                case Collision.UP: updateYaxisMovement(false, true); break;
+                case Collision.DOWN: updateYaxisMovement(true, false); break;
+            }
+
+        }
+
+        public override void update(double delta)
         {
-            movement = moveFlags;
-
             if (isSticked)
-                changeSpeed(Player.DEFAULT_SPEED);
+                speed = Player.DEFAULT_SPEED;
             else {
-                changeSpeed(DEFAULT_SPEED);
-                movement.up = true;
+                speed = DEFAULT_SPEED;
+                updateYaxisMovement(true, false);
             }
 
-            base.update(delta, movement);
+            base.update(delta);
         }
 
-        public void update(double delta) {
-          
-            if (position.X <= 0) {
-                movement.right = true;
-                movement.left = false;
-            }
-
-            if (position.Y <= 0)
-            {
-                movement.up = false;
-                movement.down = true;
-            }
-
-            base.update(delta, movement);
-        }
+  
     }
 }
