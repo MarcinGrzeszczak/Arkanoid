@@ -37,6 +37,14 @@ namespace Arkanoid
                     controllerKeyFlags.isPressedRight);
             }
 
+            GameObject.Collision playerBorderCollision = border.isCollided(player);
+
+            if(playerBorderCollision == GameObject.Collision.LEFT)
+                player.updateXaxisMovement(false, controllerKeyFlags.isPressedRight);
+
+            if(playerBorderCollision == GameObject.Collision.RIGHT)
+                player.updateXaxisMovement( controllerKeyFlags.isPressedLeft, false);
+
             player.update(delta);
             ball.update(delta);
 

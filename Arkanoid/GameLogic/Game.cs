@@ -19,6 +19,7 @@ namespace Arkanoid
 
             //TODO: Usunac tworzenie levelu z konstruktora
             GameObject border = new GameObject(new Point(width, height), new Point(0, 0));
+            border.invertCollision = true;
 
             GameLevel level = new GameLevel();
             
