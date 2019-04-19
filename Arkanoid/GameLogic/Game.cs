@@ -21,8 +21,9 @@ namespace Arkanoid
             GameLevel level = new GameLevel();
             
             level.randomLevel();
-            Collisions collisions = new Collisions(new Rect(0,0,width,height));
-            gameState = new GameState(collisions);
+
+            //TODO: Naprawic hacka ze statyczna zmienna borders w GameObject
+            gameState = new GameState();
             gameState.load(level);
 
             gameCanvas = new GameCanvas(draw);

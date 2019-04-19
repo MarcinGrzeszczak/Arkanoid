@@ -1,4 +1,5 @@
 ﻿
+using Arkanoid.GameLogic;
 using System.Windows;
 using System.Windows.Media;
 
@@ -6,6 +7,8 @@ namespace Arkanoid.GameObjects
 {
     class GameObject
     {
+        public enum Collision { LEFT, RIGHT, UP, DOWN, NONE }
+        
         public Point size;
         public Point position;
 
@@ -16,5 +19,6 @@ namespace Arkanoid.GameObjects
         }
 
         public virtual void draw(DrawingContext dc) { }
+
     }
 }

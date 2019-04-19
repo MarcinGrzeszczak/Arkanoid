@@ -63,7 +63,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GameLogic\Collisions.cs" />
     <Compile Include="GameLogic\Game.cs" />
     <Compile Include="GameLogic\GameCanvas.cs" />
     <Compile Include="GameLogic\GameController.cs" />
@@ -104,6 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

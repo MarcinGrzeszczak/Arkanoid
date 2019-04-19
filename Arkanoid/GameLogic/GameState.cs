@@ -2,56 +2,41 @@
 using Arkanoid.GameObjects;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace Arkanoid
 {
     class GameState
     {
-     
-
         private const int DEFAULT_LIVES = 3;
 
-        private Collisions collisions;
         private List<Brick> bricks;
         private Player player;
         private Ball ball;
         private int currentLives;
-        public GameState(Collisions collisions) {
+        public GameState() {
             init();
-            this.collisions = collisions;
         }
 
         public void restartState() {
             init();
         }
 
-        private bool isBorder(GameObject obj)
-        {
-
-
-            return false;
-        }
-
         public void update(double delta, GameController.KeyFlags controllerKeyFlags) {
-            Player.MoveDir movement = Player.movementWrapper(
+           player.updateXaxisMovement(
                 controllerKeyFlags.isPressedLeft, 
                 controllerKeyFlags.isPressedRight);
-
-            if (collisions.isBorder(player) == Collisions.Border.LEFT)
-                movement.left = false;
-
-            if (collisions.isBorder(player) == Collisions.Border.RIGHT)
-                movement.right = false;
-
-            player.update(delta,movement);
 
             if (ball.isSticked) {
                 if (controllerKeyFlags.isPressedSpace)
                     ball.isSticked = false;
-                ball.update(delta, movement);
+                ball.updateXaxisMovement(
+                    controllerKeyFlags.isPressedLeft,
+                    controllerKeyFlags.isPressedRight);
             }
-            else
-                ball.update(delta);
+
+            player.update(delta);
+            ball.update(delta);
 
         }
 

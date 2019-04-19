@@ -12,8 +12,6 @@ namespace Arkanoid
         private Action<DrawingContext> drawCallback;
         public GameCanvas(Action<DrawingContext> drawCallback) {
             this.drawCallback = drawCallback;
-
-          
         }
 
         public void setBackground(Color color)

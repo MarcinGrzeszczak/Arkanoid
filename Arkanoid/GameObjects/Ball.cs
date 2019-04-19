@@ -7,8 +7,6 @@ namespace Arkanoid.GameObjects
     class Ball : MovingGameObject {
 
         private static double DEFAULT_SPEED = 10;
-        private MoveDir movement;
-
         public static Point DEFAULT_SIZE = new Point(7, 7);
         public bool isSticked;
         public Ball(Point size, Point position) : base(size, position)
