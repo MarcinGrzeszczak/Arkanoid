@@ -18,6 +18,23 @@ namespace Arkanoid.GameObjects
             this.position = position;
         }
 
+        public Collision isCollided(GameObject obj) {
+
+            if (position.X <= obj.position.X)
+                return Collision.LEFT;
+
+            if (position.X + size.X >= obj.position.X + obj.size.X)
+                return Collision.RIGHT;
+
+            if (position.Y <= obj.position.Y)
+                return Collision.UP;
+
+            if (position.Y + size.Y >= obj.position.Y + obj.size.Y)
+                return Collision.DOWN;
+
+            return Collision.NONE;
+        }
+
         public virtual void draw(DrawingContext dc) { }
 
     }
