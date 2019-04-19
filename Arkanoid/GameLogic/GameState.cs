@@ -29,28 +29,22 @@ namespace Arkanoid
                 controllerKeyFlags.isPressedLeft, 
                 controllerKeyFlags.isPressedRight);
 
-           
-            GameObject.Collision playerBorderCollision = player.isCollided(border);
-
-            if (playerBorderCollision == GameObject.Collision.LEFT)
-                player.updateXaxisMovement(false, controllerKeyFlags.isPressedRight);
-    
-            if (playerBorderCollision == GameObject.Collision.RIGHT)
-                player.updateXaxisMovement(controllerKeyFlags.isPressedLeft, false);
-
+            player.reactToCollision(player.isCollided(border));
 
             if (ball.isSticked) 
                 ball.movement = player.movement;
 
             else {
-                ball.bounce(ball.isCollided(border));
+                ball.reactToCollision(ball.isCollided(player));
+                ball.reactToCollision(ball.isCollided(border));   
             }
 
             if (controllerKeyFlags.isPressedSpace && ball.isSticked)
                 ball.throwBall();
 
-            player.update(delta);
+           
             ball.update(delta);
+            player.update(delta);
 
         }
 

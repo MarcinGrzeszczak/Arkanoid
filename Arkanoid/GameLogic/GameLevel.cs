@@ -46,7 +46,7 @@ namespace Arkanoid.GameLogic
             player = new Player(new Point(200,700));
             
             // TODO: Udostepnic publicznie size obiektow
-            ball = new Ball(new Point(200 + Player.DEFAULT_SIZE.X / 2, 700 - Ball.DEFAULT_SIZE.Y));
+            ball = new Ball(new Point(200 + Player.DEFAULT_SIZE.X / 2, 700 - Ball.DEFAULT_SIZE.Y- 1));
             bricks = new List<Brick>();
             backgorundColor = Colors.DarkCyan;
 

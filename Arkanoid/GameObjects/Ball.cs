@@ -38,7 +38,7 @@ namespace Arkanoid.GameObjects
             dc.DrawEllipse(brush, null, position, size.X, size.Y);
         }
 
-        public void bounce(Collision collision) {
+        public override void reactToCollision(Collision collision) {
             switch (collision){
                 case Collision.LEFT: updateXaxisMovement(false, true); break;
                 case Collision.RIGHT: updateXaxisMovement(true, false); break;

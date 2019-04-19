@@ -26,9 +26,13 @@ namespace Arkanoid.GameObjects
             dc.DrawRoundedRectangle(brush, null, new Rect(position.X, position.Y, size.X, size.Y), 10, 10);
         }
 
-        public override void update(double delta)
-        {  
-            base.update(delta);
+        public override void reactToCollision(Collision collision) {
+            if (collision == Collision.LEFT)
+                updateXaxisMovement(false, movement.right);
+
+            if (collision == Collision.RIGHT)
+                updateXaxisMovement(movement.left, false);
         }
+
     }
 }

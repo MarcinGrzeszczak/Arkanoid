@@ -36,6 +36,8 @@ namespace Arkanoid.GameObjects
             position.Y += acceleration[1];
         }
 
+        public virtual void reactToCollision(Collision collision) {}
+
         public virtual void update(double delta)
         {
             double currentSpeed = speed / delta;
