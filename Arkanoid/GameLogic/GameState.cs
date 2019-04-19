@@ -10,11 +10,13 @@ namespace Arkanoid
     {
         private const int DEFAULT_LIVES = 3;
 
+        private GameObject border;
         private List<Brick> bricks;
         private Player player;
         private Ball ball;
         private int currentLives;
-        public GameState() {
+        public GameState(GameObject border) {
+            this.border = border;
             init();
         }
 

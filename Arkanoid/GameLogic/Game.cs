@@ -18,12 +18,13 @@ namespace Arkanoid
             this.controller = controller;
 
             //TODO: Usunac tworzenie levelu z konstruktora
+            GameObject border = new GameObject(new Point(width, height), new Point(0, 0));
+
             GameLevel level = new GameLevel();
             
             level.randomLevel();
 
-            //TODO: Naprawic hacka ze statyczna zmienna borders w GameObject
-            gameState = new GameState();
+            gameState = new GameState(border);
             gameState.load(level);
 
             gameCanvas = new GameCanvas(draw);
