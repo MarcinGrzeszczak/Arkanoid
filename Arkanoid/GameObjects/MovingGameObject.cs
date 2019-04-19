@@ -14,8 +14,10 @@ namespace Arkanoid.GameObjects
         }
 
         protected double speed;
-        protected MoveDir movement;
+        public MoveDir movement;
         protected double[] acceleration = { 0, 0 };
+
+        public MovingGameObject(Point size, Point position) : base(size, position) { }
 
         public void updateXaxisMovement(bool left, bool right) {
             movement.left = left;
@@ -27,8 +29,6 @@ namespace Arkanoid.GameObjects
             movement.up = up;
             movement.down = down;
         }
-
-        public MovingGameObject(Point size, Point position) : base(size, position) { }
 
         private void updatePosition()
         {

@@ -51,6 +51,7 @@ namespace Arkanoid.GameObjects
             return Collision.NONE;
         }
 
+
         public virtual void draw(DrawingContext dc) { }
 
     }

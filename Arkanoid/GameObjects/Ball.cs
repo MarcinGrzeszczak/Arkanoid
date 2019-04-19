@@ -19,9 +19,6 @@ namespace Arkanoid.GameObjects
             init();
         }
 
-        private void changeSpeed(double newSpeed) {
-            speed = newSpeed;
-        }
         private void init()
         {
             speed = DEFAULT_SPEED;
@@ -51,18 +48,18 @@ namespace Arkanoid.GameObjects
 
         }
 
+        public void throwBall() {
+            isSticked = false;
+            speed = DEFAULT_SPEED;
+            updateYaxisMovement(true, false);
+        }
+
         public override void update(double delta)
         {
             if (isSticked)
                 speed = Player.DEFAULT_SPEED;
-            else {
-                speed = DEFAULT_SPEED;
-                updateYaxisMovement(true, false);
-            }
-
+           
             base.update(delta);
         }
-
-  
     }
 }
