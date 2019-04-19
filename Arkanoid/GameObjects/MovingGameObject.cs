@@ -14,7 +14,20 @@ namespace Arkanoid.GameObjects
         }
 
         protected double speed;
+        protected MoveDir movement;
         protected double[] acceleration = { 0, 0 };
+
+        public void updateXaxisMovement(bool left, bool right) {
+            movement.left = left;
+            movement.right = right;
+        }
+
+        public void updateYaxisMovement(bool up, bool down)
+        {
+            movement.up = up;
+            movement.down = down;
+        }
+
         public MovingGameObject(Point size, Point position) : base(size, position) { }
 
         private void updatePosition()
@@ -23,20 +36,20 @@ namespace Arkanoid.GameObjects
             position.Y += acceleration[1];
         }
 
-        public virtual void update(double delta, MoveDir moveFlags)
+        public virtual void update(double delta)
         {
             double currentSpeed = speed / delta;
             double speedX = 0;
             double speedY = 0;
 
-            if (moveFlags.left)
+            if (movement.left)
                 speedX = -currentSpeed;
-            else if (moveFlags.right)
+            if (movement.right)
                 speedX = currentSpeed;
 
-            if (moveFlags.up)
+            if (movement.up)
                 speedY = -currentSpeed;
-            else if (moveFlags.down)
+            if (movement.down)
                 speedY = currentSpeed;
 
             acceleration[0] = speedX;

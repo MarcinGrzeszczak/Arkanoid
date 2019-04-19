@@ -15,17 +15,6 @@ namespace Arkanoid.GameObjects
             init();
         }
 
-        public static MoveDir movementWrapper(bool isPressedLeft, bool isPressedRight)
-        {
-            MoveDir movement;
-            movement.left = isPressedLeft;
-            movement.right = isPressedRight;
-            movement.up = false;
-            movement.down = false;
-
-            return movement;
-        }
-
         private void init() {
             speed = DEFAULT_SPEED;
         }
@@ -37,9 +26,9 @@ namespace Arkanoid.GameObjects
             dc.DrawRoundedRectangle(brush, null, new Rect(position.X, position.Y, size.X, size.Y), 10, 10);
         }
 
-        public override void update(double delta, MoveDir moveFlags)
-        {
-            base.update(delta, moveFlags);
+        public override void update(double delta)
+        {  
+            base.update(delta);
         }
     }
 }
