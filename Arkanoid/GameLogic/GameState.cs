@@ -30,7 +30,7 @@ namespace Arkanoid
                 controllerKeyFlags.isPressedRight);
 
            
-            GameObject.Collision playerBorderCollision = border.isCollided(player);
+            GameObject.Collision playerBorderCollision = player.isCollided(border);
 
             if (playerBorderCollision == GameObject.Collision.LEFT)
                 player.updateXaxisMovement(false, controllerKeyFlags.isPressedRight);
@@ -41,12 +41,9 @@ namespace Arkanoid
 
             if (ball.isSticked) 
                 ball.movement = player.movement;
-            else {
-                ball.bounce(border.isCollided(ball));
 
-                GameObject.Collision playerCollision = ball.isCollided(player);
-                if (playerCollision == GameObject.Collision.DOWN)
-                    ball.bounce(GameObject.Collision.DOWN);
+            else {
+                ball.bounce(ball.isCollided(border));
             }
 
             if (controllerKeyFlags.isPressedSpace && ball.isSticked)
