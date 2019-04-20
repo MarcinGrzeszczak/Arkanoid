@@ -3,6 +3,7 @@ using Arkanoid.GameObjects;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using static Arkanoid.GameObjects.GameObject;
 
 namespace Arkanoid
 {
@@ -15,6 +16,7 @@ namespace Arkanoid
         private Player player;
         private Ball ball;
         private int currentLives;
+        public int score;
         public GameState(GameBorder border) {
             this.border = border;
             init();
@@ -36,7 +38,15 @@ namespace Arkanoid
 
             else {
                 ball.reactToCollision(ball.isCollided(player));
-                ball.reactToCollision(border.isCollided(ball));   
+                ball.reactToCollision(border.isCollided(ball));
+                for (int brickIndex = 0; brickIndex < bricks.Count; ++brickIndex) {
+                    Collision isCollidedWithBrick = ball.isCollided(bricks[brickIndex]);
+                    ball.reactToCollision(isCollidedWithBrick);
+
+                    if(isCollidedWithBrick != Collision.NONE) {
+                        bricks.RemoveAt(brickIndex);
+                    }
+                }
             }
 
             if (controllerKeyFlags.isPressedSpace && ball.isSticked)
@@ -66,6 +76,7 @@ namespace Arkanoid
         private void init()
         {
             bricks = new List<Brick>();
+            score = 0;
             currentLives = DEFAULT_LIVES;
            
         }
