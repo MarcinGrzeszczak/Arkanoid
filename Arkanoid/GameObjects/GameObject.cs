@@ -12,6 +12,7 @@ namespace Arkanoid.GameObjects
 
         public Border border;
         public Point size;
+        protected Point startPosition;
         public Point position;
       
      
@@ -28,6 +29,7 @@ namespace Arkanoid.GameObjects
         {
             this.size = size;
             this.position = position;
+            this.startPosition = position;
         }
 
         public virtual Collision isCollided(GameObject obj) {

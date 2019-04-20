@@ -15,7 +15,7 @@ namespace Arkanoid
         private List<Brick> bricks;
         private Player player;
         private Ball ball;
-        private int currentLives;
+        public int currentLives;
         public int score;
         public GameState(GameBorder border) {
             this.border = border;
@@ -30,6 +30,15 @@ namespace Arkanoid
             score += points;
         }
 
+        private void loseLive(){
+            ball.isSticked = true;
+            ball.restartPosition();
+            player.restartPosition();
+
+            if (currentLives > 0)
+                --currentLives;
+        }
+
         public void update(double delta, GameController.KeyFlags controllerKeyFlags) {
            player.updateXaxisMovement(
                 controllerKeyFlags.isPressedLeft, 
@@ -42,7 +51,14 @@ namespace Arkanoid
 
             else {
                 ball.reactToCollision(ball.isCollided(player));
-                ball.reactToCollision(border.isCollided(ball));
+
+                Collision isCollidedWithBorder = border.isCollided(ball);
+                if (isCollidedWithBorder == Collision.DOWN) {
+                    loseLive();
+                }
+                else
+                    ball.reactToCollision(isCollidedWithBorder);
+
                 for (int brickIndex = 0; brickIndex < bricks.Count; ++brickIndex) {
                     Collision isCollidedWithBrick = ball.isCollided(bricks[brickIndex]);
                     ball.reactToCollision(isCollidedWithBrick);

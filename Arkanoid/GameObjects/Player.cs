@@ -28,6 +28,12 @@ namespace Arkanoid.GameObjects
             dc.DrawRoundedRectangle(brush, null, new Rect(position.X - size.X /2, position.Y - size.Y / 2, size.X, size.Y), 10, 10);
         }
 
+        public override void restartPosition()
+        {
+            base.restartPosition();
+            centerPosition();
+        }
+
         public override void reactToCollision(Collision collision) {
             if (collision == Collision.LEFT)
                 updateXaxisMovement(false, movement.right);

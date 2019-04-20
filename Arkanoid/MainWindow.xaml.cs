@@ -25,7 +25,8 @@ namespace Arkanoid
                 controller);
 
             game.setScoreLabel(Score_Content_Label);
-           
+            game.setLiveLabel(Live_Content_Label);
+
             GameCanvas gameCanvas = game.getGameCanvas();
             Grid.SetColumn(gameCanvas, 1);
             mainGrid.Children.Add(gameCanvas);

@@ -13,9 +13,10 @@ namespace Arkanoid
         private GameCanvas gameCanvas;
         private GameState gameState;
         private GameController controller;
-        private Label scoreLabel;
+        private Label scoreLabel, liveLabel;
         public Game(double width, double height, GameController controller)
         {
+            liveLabel = null;
             scoreLabel = null;
             this.controller = controller;
 
@@ -38,6 +39,10 @@ namespace Arkanoid
 
         public void setScoreLabel(Label scoreLabel){
             this.scoreLabel = scoreLabel;
+        }
+
+        public void setLiveLabel(Label liveLabel){
+            this.liveLabel = liveLabel;
         }
         private void loop(double fps)
         {
@@ -65,7 +70,12 @@ namespace Arkanoid
         }
 
         private void updateControls(){
-            scoreLabel.Dispatcher.Invoke(() => scoreLabel.Content = gameState.score);
+            if(scoreLabel != null)
+                scoreLabel.Dispatcher.Invoke(() => scoreLabel.Content = gameState.score);
+
+            if (liveLabel != null)
+                liveLabel.Dispatcher.Invoke(() => liveLabel.Content = gameState.currentLives);
+
         }
 
         private void draw(DrawingContext dc)

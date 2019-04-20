@@ -19,6 +19,10 @@ namespace Arkanoid.GameObjects
 
         public MovingGameObject(Point size, Point position) : base(size, position) { }
 
+        public virtual void restartPosition(){
+            position = startPosition;
+        }
+
         public void updateXaxisMovement(bool left, bool right) {
             movement.left = left;
             movement.right = right;
