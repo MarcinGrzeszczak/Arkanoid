@@ -11,6 +11,7 @@ namespace Arkanoid
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Game game;
         public MainWindow()
         {
             InitializeComponent();
@@ -18,11 +19,12 @@ namespace Arkanoid
             GameController controller = new GameController();
             mainWindow.KeyDown += controller.keyDownEvent;
             mainWindow.KeyUp += controller.keyUpEvent;
-
-            Game game = new Game(
+        
+            game = new Game(
                 mainGrid.ColumnDefinitions[1].Width.Value, 
                 761,
-                controller);
+                controller,
+                endGameHandler);
 
             game.setScoreLabel(Score_Content_Label);
             game.setLiveLabel(Live_Content_Label);
@@ -30,6 +32,25 @@ namespace Arkanoid
             GameCanvas gameCanvas = game.getGameCanvas();
             Grid.SetColumn(gameCanvas, 1);
             mainGrid.Children.Add(gameCanvas);
-        }           
+
+            NewGameButton.Click += StartNewGame;
+            TryAgainButton.Click += StartNewGame;
+        }
+
+        private void StartNewGame(object sender, RoutedEventArgs e)
+        {
+            game.start();
+            NewGame_Splash_Screen.Visibility = Visibility.Collapsed;
+            EndGame_Splash_Screen.Visibility = Visibility.Collapsed;
+        }
+
+        private void endGameHandler(int score) {
+            Dispatcher.Invoke(() =>
+            {
+                EndGame_Splash_Screen.Visibility = Visibility.Visible;
+                FinalScoreLabel.Content = score;
+            });
+         
+        }
     }
 }

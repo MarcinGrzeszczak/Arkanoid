@@ -16,6 +16,7 @@ namespace Arkanoid
         private Player player;
         private Ball ball;
         public int currentLives;
+        public bool endgame;
         public int score;
         public GameState(GameBorder border) {
             this.border = border;
@@ -35,8 +36,10 @@ namespace Arkanoid
             ball.restartPosition();
             player.restartPosition();
 
-            if (currentLives > 0)
+            if (currentLives > 1)
                 --currentLives;
+            else
+                endgame = true;
         }
 
         public void update(double delta, GameController.KeyFlags controllerKeyFlags) {
@@ -81,6 +84,8 @@ namespace Arkanoid
 
         public void load(GameLevel level)
         {
+            restartState();
+
             this.bricks = level.getBricks();
             player = level.getPlayer();
             ball = level.getBall();
@@ -89,13 +94,18 @@ namespace Arkanoid
         public List<GameObject> getObjects()
         {
             List<GameObject> allObjects = bricks.Cast<GameObject>().ToList();
-            allObjects.Add(player);
-            allObjects.Add(ball);
+            if(player != null)
+                allObjects.Add(player);
+
+            if(ball != null)
+                allObjects.Add(ball);
+
             return allObjects;
         }
 
         private void init()
         {
+            endgame = false;
             bricks = new List<Brick>();
             score = 0;
             currentLives = DEFAULT_LIVES;
