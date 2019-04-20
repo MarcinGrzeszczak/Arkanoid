@@ -16,6 +16,7 @@ namespace Arkanoid.GameObjects
         }
 
         private void init() {
+            centerPosition();
             speed = DEFAULT_SPEED;
         }
 
@@ -23,7 +24,8 @@ namespace Arkanoid.GameObjects
             SolidColorBrush brush = new SolidColorBrush();
             brush.Color = Colors.Black;
 
-            dc.DrawRoundedRectangle(brush, null, new Rect(position.X, position.Y, size.X, size.Y), 10, 10);
+            //TODO: Przeniesc gdzies indziej obliczanie oryginalnej pozycji
+            dc.DrawRoundedRectangle(brush, null, new Rect(position.X - size.X /2, position.Y - size.Y / 2, size.X, size.Y), 10, 10);
         }
 
         public override void reactToCollision(Collision collision) {

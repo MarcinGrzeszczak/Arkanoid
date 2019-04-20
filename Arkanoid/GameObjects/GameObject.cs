@@ -41,5 +41,9 @@ namespace Arkanoid.GameObjects
 
         public virtual void draw(DrawingContext dc) { }
 
+        protected void centerPosition(){
+            position.X = position.X + size.X / 2;
+            position.Y = position.Y + size.Y / 2;
+        }
     }
 }
