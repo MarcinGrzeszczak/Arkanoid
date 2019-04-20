@@ -26,6 +26,10 @@ namespace Arkanoid
             init();
         }
 
+        private void addScore(int points) {
+            score += points;
+        }
+
         public void update(double delta, GameController.KeyFlags controllerKeyFlags) {
            player.updateXaxisMovement(
                 controllerKeyFlags.isPressedLeft, 
@@ -44,6 +48,7 @@ namespace Arkanoid
                     ball.reactToCollision(isCollidedWithBrick);
 
                     if(isCollidedWithBrick != Collision.NONE) {
+                        addScore(Brick.POINTS);
                         bricks.RemoveAt(brickIndex);
                     }
                 }

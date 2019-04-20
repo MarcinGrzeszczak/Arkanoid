@@ -23,6 +23,8 @@ namespace Arkanoid
                 mainGrid.ColumnDefinitions[1].Width.Value, 
                 761,
                 controller);
+
+            game.setScoreLabel(Score_Content_Label);
            
             GameCanvas gameCanvas = game.getGameCanvas();
             Grid.SetColumn(gameCanvas, 1);

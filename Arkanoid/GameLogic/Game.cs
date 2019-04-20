@@ -3,6 +3,7 @@ using Arkanoid.GameObjects;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Arkanoid
@@ -12,9 +13,10 @@ namespace Arkanoid
         private GameCanvas gameCanvas;
         private GameState gameState;
         private GameController controller;
-        
+        private Label scoreLabel;
         public Game(double width, double height, GameController controller)
         {
+            scoreLabel = null;
             this.controller = controller;
 
             //TODO: Usunac tworzenie levelu z konstruktora
@@ -34,6 +36,9 @@ namespace Arkanoid
             Task.Factory.StartNew(()=>loop(60));
         }
 
+        public void setScoreLabel(Label scoreLabel){
+            this.scoreLabel = scoreLabel;
+        }
         private void loop(double fps)
         {
             double delay = 1000 / fps;
@@ -52,10 +57,15 @@ namespace Arkanoid
                 while (delta >= 1)
                 {
                     gameState.update(delta, controller.getKeyFlags());
+                    updateControls();
                     gameCanvas.refreshDraw();
                     delta--;
                 }
             }
+        }
+
+        private void updateControls(){
+            scoreLabel.Dispatcher.Invoke(() => scoreLabel.Content = gameState.score);
         }
 
         private void draw(DrawingContext dc)
