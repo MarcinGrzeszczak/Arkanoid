@@ -17,17 +17,23 @@ namespace Arkanoid.GameObjects
         }
 
         public Collision isCollided(GameObject obj) {
-                if (position.X <= obj.position.X)
-                    return Collision.LEFT;
+             if(position.X >= obj.position.X && position.X <= obj.position.X + obj.size.X){
 
-                if (position.X + size.X >= obj.position.X + obj.size.X)
+                if (position.Y >= obj.position.Y && position.Y <= obj.position.Y + obj.size.Y / 2)
+                    return Collision.DOWN;
+
+                if (position.Y <= obj.position.Y + obj.size.Y && position.Y >= obj.position.Y + obj.size.Y / 2)
+                    return Collision.UP;
+            }
+
+            if(position.Y >= obj.position.Y && position.Y <= obj.position.Y + obj.size.Y) {
+
+                if (position.X >= obj.position.X && position.X <= obj.position.X + obj.size.X / 2)
                     return Collision.RIGHT;
 
-                if (position.Y <= obj.position.Y)
-                    return Collision.UP;
-
-                if (position.Y + size.Y >= obj.position.Y + obj.size.Y)
-                    return Collision.DOWN;
+                if (position.X <= obj.position.X + obj.size.X && position.X >= obj.position.X + obj.size.X / 2)
+                    return Collision.LEFT;
+            }
         
             return Collision.NONE;
         }
