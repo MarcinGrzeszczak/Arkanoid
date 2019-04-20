@@ -5,10 +5,24 @@ namespace Arkanoid.GameObjects
 {
     class GameObject
     {
+        public struct Border {
+            public double left, right, top, bottom;
+        }
         public enum Collision { LEFT, RIGHT, UP, DOWN, NONE }
-        
+
+        public Border border;
         public Point size;
         public Point position;
+      
+     
+        public void updateBorder()
+        {
+            border.left = position.X - size.X / 2;
+            border.right = position.X + size.X / 2;
+
+            border.top = position.Y - size.Y / 2;
+            border.bottom = position.Y + size.Y / 2;
+        }
 
         public GameObject(Point size, Point position)
         {
@@ -17,21 +31,24 @@ namespace Arkanoid.GameObjects
         }
 
         public virtual Collision isCollided(GameObject obj) {
-             if(position.X >= obj.position.X && position.X <= obj.position.X + obj.size.X){
+            updateBorder();
+            obj.updateBorder();
 
-                if (position.Y >= obj.position.Y && position.Y <= obj.position.Y + obj.size.Y / 2)
+             if(border.right >= obj.border.left && border.left <= obj.border.right){
+
+                if (border.bottom >= obj.border.top && border.bottom <= obj.position.Y)
                     return Collision.DOWN;
 
-                if (position.Y <= obj.position.Y + obj.size.Y && position.Y >= obj.position.Y + obj.size.Y / 2)
+                if (border.top <= obj.border.bottom && border.top >= obj.position.Y)
                     return Collision.UP;
             }
 
-            if(position.Y >= obj.position.Y && position.Y <= obj.position.Y + obj.size.Y) {
+            if(border.bottom >= obj.border.top && border.top <= obj.border.bottom) {
 
-                if (position.X >= obj.position.X && position.X <= obj.position.X + obj.size.X / 2)
+                if (border.right >= obj.border.left && border.right <= obj.position.X)
                     return Collision.RIGHT;
 
-                if (position.X <= obj.position.X + obj.size.X && position.X >= obj.position.X + obj.size.X / 2)
+                if (border.left <= obj.border.right && border.left >= obj.position.X)
                     return Collision.LEFT;
             }
         
@@ -41,7 +58,7 @@ namespace Arkanoid.GameObjects
 
         public virtual void draw(DrawingContext dc) { }
 
-        protected void centerPosition(){
+        protected void centerPosition (){
             position.X = position.X + size.X / 2;
             position.Y = position.Y + size.Y / 2;
         }

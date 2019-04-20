@@ -14,16 +14,18 @@ namespace Arkanoid.GameLogic
 
         public override Collision isCollided(GameObject obj)
         {
-            if (position.X >= obj.position.X)
+            obj.updateBorder();
+
+            if (position.X >= obj.border.left)
                 return Collision.LEFT;
 
-            if (position.X + size.X <= obj.position.X)
+            if (position.X + size.X <= obj.border.right)
                 return Collision.RIGHT;
 
-            if (position.Y >= obj.position.Y)
+            if (position.Y >= obj.border.top)
                 return Collision.UP;
 
-            if (position.Y + size.Y <= obj.position.Y)
+            if (position.Y + size.Y <= obj.border.bottom)
                 return Collision.DOWN;
 
             return Collision.NONE;
