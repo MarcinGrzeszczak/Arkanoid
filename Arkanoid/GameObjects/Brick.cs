@@ -14,20 +14,25 @@ namespace Arkanoid.GameObjects
 
         public Brick(Point size, Point position, Color brickColor): base(size, position)
         {
-            this.brickColor = brickColor;
+            init(brickColor);
         }
 
         public Brick(Point position, Color brickColor) :base(DEFAULT_SIZE, position)
         {
-            this.brickColor = brickColor;
+            init(brickColor);
+           
         }
 
+        private void init(Color brickColor){
+            centerPosition();
+            this.brickColor = brickColor;
+        }
         public override void draw(DrawingContext dc)
         {
             SolidColorBrush brush = new SolidColorBrush();
             brush.Color = brickColor;
 
-            dc.DrawRectangle(brush, null, new Rect(position.X, position.Y, size.X, size.Y));
+            dc.DrawRectangle(brush, null, new Rect(position.X - size.X /2, position.Y - size.Y/2, size.X, size.Y));
         }
     }
 }
