@@ -18,7 +18,7 @@ namespace Arkanoid
             this.controller = controller;
 
             //TODO: Usunac tworzenie levelu z konstruktora
-            GameObject border = new GameObject(new Point(width, height), new Point(0, 0));
+            GameBorder border = new GameBorder(new Point(width, height), new Point(0, 0));
           
             GameLevel level = new GameLevel();
             

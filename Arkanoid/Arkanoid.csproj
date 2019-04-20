@@ -64,6 +64,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GameLogic\Game.cs" />
+    <Compile Include="GameLogic\GameBorder.cs" />
     <Compile Include="GameLogic\GameCanvas.cs" />
     <Compile Include="GameLogic\GameController.cs" />
     <Compile Include="GameLogic\GameLevel.cs" />

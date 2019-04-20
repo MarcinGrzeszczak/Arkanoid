@@ -10,12 +10,12 @@ namespace Arkanoid
     {
         private const int DEFAULT_LIVES = 3;
 
-        private GameObject border;
+        private GameBorder border;
         private List<Brick> bricks;
         private Player player;
         private Ball ball;
         private int currentLives;
-        public GameState(GameObject border) {
+        public GameState(GameBorder border) {
             this.border = border;
             init();
         }
@@ -29,14 +29,14 @@ namespace Arkanoid
                 controllerKeyFlags.isPressedLeft, 
                 controllerKeyFlags.isPressedRight);
 
-            player.reactToCollision(player.isCollided(border));
+            player.reactToCollision(border.isCollided(player));
 
             if (ball.isSticked) 
                 ball.movement = player.movement;
 
             else {
                 ball.reactToCollision(ball.isCollided(player));
-                ball.reactToCollision(ball.isCollided(border));   
+                ball.reactToCollision(border.isCollided(ball));   
             }
 
             if (controllerKeyFlags.isPressedSpace && ball.isSticked)

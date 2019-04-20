@@ -16,7 +16,7 @@ namespace Arkanoid.GameObjects
             this.position = position;
         }
 
-        public Collision isCollided(GameObject obj) {
+        public virtual Collision isCollided(GameObject obj) {
              if(position.X >= obj.position.X && position.X <= obj.position.X + obj.size.X){
 
                 if (position.Y >= obj.position.Y && position.Y <= obj.position.Y + obj.size.Y / 2)
