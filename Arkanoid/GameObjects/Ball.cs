@@ -7,6 +7,7 @@ namespace Arkanoid.GameObjects
     class Ball : MovingGameObject {
 
         private static double DEFAULT_SPEED = 10;
+        private Random rand;
         public static Point DEFAULT_SIZE = new Point(7, 7);
         public bool isSticked;
         public Ball(Point size, Point position) : base(size, position)
@@ -19,8 +20,18 @@ namespace Arkanoid.GameObjects
             init();
         }
 
+        private void randomizeDirection(){
+            int randDir = rand.Next(0, 2);
+            if (randDir % 2 == 0)
+                movement.right = true;
+            else
+                movement.left = true;
+        }
+
         private void init()
         {
+            rand = new Random();
+           
             speed = DEFAULT_SPEED;
             isSticked = true;
 
@@ -51,6 +62,7 @@ namespace Arkanoid.GameObjects
         public void throwBall() {
             isSticked = false;
             speed = DEFAULT_SPEED;
+            randomizeDirection();
             updateYaxisMovement(true, false);
         }
 
