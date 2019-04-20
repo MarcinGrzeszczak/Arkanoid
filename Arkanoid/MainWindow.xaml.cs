@@ -44,9 +44,15 @@ namespace Arkanoid
             EndGame_Splash_Screen.Visibility = Visibility.Collapsed;
         }
 
-        private void endGameHandler(int score) {
+        private void endGameHandler(int score, bool winner) {
             Dispatcher.Invoke(() =>
             {
+                if (winner)
+                {
+                    EndGameLabel.Content = "Epic Win!";
+                }
+                else
+                    EndGameLabel.Content = "Game Over!";
                 EndGame_Splash_Screen.Visibility = Visibility.Visible;
                 FinalScoreLabel.Content = score;
             });

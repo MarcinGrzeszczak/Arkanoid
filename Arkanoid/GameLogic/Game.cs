@@ -15,9 +15,9 @@ namespace Arkanoid
         private GameController controller;
         private GameLevel level;
         private Label scoreLabel, liveLabel;
-        private Action<int> endGameCallback;
+        private Action<int,bool> endGameCallback;
         private bool isRunning;
-        public Game(double width, double height, GameController controller, Action<int> endGameCallback)
+        public Game(double width, double height, GameController controller, Action<int,bool> endGameCallback)
         {
             isRunning = false;
             liveLabel = null;
@@ -95,7 +95,7 @@ namespace Arkanoid
         public void stop() {
             isRunning = false;
             
-            endGameCallback(gameState.score);
+            endGameCallback(gameState.score,gameState.isWin);
         }
         public GameCanvas getGameCanvas() => this.gameCanvas;
     }

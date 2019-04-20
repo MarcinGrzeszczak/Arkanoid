@@ -17,6 +17,7 @@ namespace Arkanoid
         private Ball ball;
         public int currentLives;
         public bool endgame;
+        public bool isWin;
         public int score;
         public GameState(GameBorder border) {
             this.border = border;
@@ -43,6 +44,7 @@ namespace Arkanoid
         }
 
         public void update(double delta, GameController.KeyFlags controllerKeyFlags) {
+
            player.updateXaxisMovement(
                 controllerKeyFlags.isPressedLeft, 
                 controllerKeyFlags.isPressedRight);
@@ -70,6 +72,11 @@ namespace Arkanoid
                         addScore(Brick.POINTS);
                         bricks.RemoveAt(brickIndex);
                     }
+                }
+
+                if(bricks.Count <= 0) {
+                    endgame = true;
+                    isWin = true;
                 }
             }
 
@@ -106,6 +113,7 @@ namespace Arkanoid
         private void init()
         {
             endgame = false;
+            isWin = false;
             bricks = new List<Brick>();
             score = 0;
             currentLives = DEFAULT_LIVES;
