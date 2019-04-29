@@ -10,28 +10,27 @@ namespace Arkanoid
 {
     class Game
     {
-        private GameCanvas gameCanvas;
+        private GameDrawing gameViewport;
         private GameState gameState;
         private GameController controller;
         private GameLevel level;
         private Label scoreLabel, liveLabel;
         private Action<int,bool> endGameCallback;
         private bool isRunning;
-        public Game(double width, double height, GameController controller, Action<int,bool> endGameCallback)
+        public Game(GameDrawing gameViewport, GameController controller, Action<int,bool> endGameCallback)
         {
             isRunning = false;
             liveLabel = null;
             scoreLabel = null;
 
+            this.gameViewport = gameViewport;
             this.controller = controller;
             this.endGameCallback = endGameCallback;
 
-            GameBorder border = new GameBorder(new Point(width, height), new Point(0, 0));
+            GameBorder border = new GameBorder(gameViewport.getsSize(), new Point(0, 0));
           
             level = new GameLevel();
             gameState = new GameState(border);
-            gameCanvas = new GameCanvas(draw);
-            gameCanvas.setSize(width, height);
         }
 
         public void setScoreLabel(Label scoreLabel){
@@ -62,7 +61,6 @@ namespace Arkanoid
                         stop();
 
                     updateControls();
-                    gameCanvas.refreshDraw();
                     delta--;
                 }
             }
@@ -86,7 +84,7 @@ namespace Arkanoid
 
             level.randomLevel();
             gameState.load(level);
-            gameCanvas.setBackground(level.getBackgourndColor());
+           
 
             isRunning = true;
             Task.Factory.StartNew(() => loop(60));
@@ -97,6 +95,5 @@ namespace Arkanoid
             
             endGameCallback(gameState.score,gameState.isWin);
         }
-        public GameCanvas getGameCanvas() => this.gameCanvas;
     }
 }

@@ -67,6 +67,7 @@
     <Compile Include="GameLogic\GameBorder.cs" />
     <Compile Include="GameLogic\GameCanvas.cs" />
     <Compile Include="GameLogic\GameController.cs" />
+    <Compile Include="GameLogic\GameDrawing.cs" />
     <Compile Include="GameLogic\GameLevel.cs" />
     <Compile Include="GameObjects\Ball.cs" />
     <Compile Include="GameObjects\Brick.cs" />
