@@ -13,12 +13,34 @@
             <ColumnDefinition Width="591*"/>
             <ColumnDefinition Width="201*"/>
         </Grid.ColumnDefinitions>
+        
+        <Viewport3D Grid.Column="1" Name="GameViewport">
+            <Viewport3D.Camera>
+                <PerspectiveCamera
+    FarPlaneDistance="100"
+    LookDirection="0,-10,-9"
+    UpDirection="0,1,0"
+    NearPlaneDistance="1"
+    Position="0,10,9"
+    FieldOfView="70" />
+            </Viewport3D.Camera>
+            
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <DirectionalLight
+                    Color="White"
+                    Direction="-2,-3,-1" />
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
+            
+        </Viewport3D>
+        
         <Label Content="00000" Name="Score_Content_Label" Grid.Column="2" HorizontalAlignment="Left" Margin="45,57,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.464,-0.014" FontSize="36"/>
         <Label Content="Score:" Name="Score_Text_Label" Grid.Column="2" HorizontalAlignment="Left" Margin="45,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.609,4.679" FontSize="24" FontWeight="Bold"/>
         <Label Content="Lives:" Name="Live_Text_Label" HorizontalAlignment="Left" Margin="45,10,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold"/>
         <Label Content="3" Name="Live_Content_Label" HorizontalAlignment="Left" Margin="45,52,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.259,0.402" FontSize="36"/>
 
-        <Grid Name="NewGame_Splash_Screen" Grid.Column="1" HorizontalAlignment="Left" Height="519" Margin="87,124,0,0" VerticalAlignment="Top" Width="416" Panel.ZIndex="99" Background="White">
+        <Grid Name="NewGame_Splash_Screen" Grid.Column="1" HorizontalAlignment="Left" Height="519" Margin="87,124,0,0" VerticalAlignment="Top" Width="416" Panel.ZIndex="99" Background="White" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="73*"/>
                 <RowDefinition Height="446*"/>
