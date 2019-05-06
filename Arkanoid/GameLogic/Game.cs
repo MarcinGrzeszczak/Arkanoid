@@ -27,7 +27,7 @@ namespace Arkanoid
             this.controller = controller;
             this.endGameCallback = endGameCallback;
 
-            GameBorder border = new GameBorder(new Point(50,49), new Point(0, 0));
+            GameBorder border = new GameBorder(new Point(7,7), new Point(-7, -7));
           
             level = new GameLevel(border);
             gameState = new GameState(border);
@@ -61,7 +61,7 @@ namespace Arkanoid
                         stop();
 
                     updateControls();
-                  
+                    refreshViewport();
                     delta--;
                 }
             }
@@ -74,6 +74,10 @@ namespace Arkanoid
             if (liveLabel != null)
                 liveLabel.Dispatcher.Invoke(() => liveLabel.Content = gameState.currentLives);
 
+        }
+
+        private void refreshViewport(){
+            gameState.getObjects().ForEach((GameObject obj) => gameViewport.refresh(obj.refreshShape));
         }
 
         private void draw()

@@ -58,11 +58,11 @@ namespace Arkanoid
                 ball.reactToCollision(ball.isCollided(player));
 
                 Collision isCollidedWithBorder = border.isCollided(ball);
-                if (isCollidedWithBorder == Collision.DOWN) {
-                    loseLive();
-                }
-                else
-                    ball.reactToCollision(isCollidedWithBorder);
+                //if (isCollidedWithBorder == Collision.DOWN) {
+                    //loseLive();
+                //}
+                //else
+                  //  ball.reactToCollision(isCollidedWithBorder);
 
                 for (int brickIndex = 0; brickIndex < bricks.Count; ++brickIndex) {
                     Collision isCollidedWithBrick = ball.isCollided(bricks[brickIndex]);

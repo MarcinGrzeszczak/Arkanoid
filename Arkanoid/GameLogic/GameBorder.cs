@@ -6,16 +6,16 @@ namespace Arkanoid.GameLogic
 {
     class GameBorder : GameObject
     {
-        public GameBorder(Point size, Point position) : base(new Point3D( position.X + size.X, position.Y + size.Y ,0), new Point(position.X - size.X, position.Y - size.Y )) { }
+        public GameBorder(Point size, Point position) : base(new Point3D(size.X,size.Y,0), position) { }
 
         public override Collision isCollided(GameObject obj)
         {
             obj.updateBorder();
 
-            if (position.X >= obj.border.left)
+            if (size.X <= obj.translatedPosition.X + obj.size.Z )
                 return Collision.LEFT;
 
-            if (position.X + size.X <= obj.border.right)
+            if (position.X >= obj.translatedPosition.X - obj.size.Z)
                 return Collision.RIGHT;
 
             if (position.Y >= obj.border.top)

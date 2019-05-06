@@ -1,14 +1,16 @@
-﻿using System;
+﻿using Arkanoid.GameLogic;
+using System;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
 namespace Arkanoid.GameObjects
 {
     class Ball : MovingGameObject {
 
-        private static double DEFAULT_SPEED = 10;
+        private static double DEFAULT_SPEED = .2;
         private Random rand;
-        public static Point3D DEFAULT_SIZE = new Point3D(7, 7, 7);
+        public static Point3D DEFAULT_SIZE = new Point3D(.25, .25, .25);
         public bool isSticked;
         public Ball(Point3D size, Point position) : base(size, position)
         {
@@ -39,6 +41,8 @@ namespace Arkanoid.GameObjects
             movement.up = false;
             movement.left = false;
             movement.right = false;
+
+            shape.Content = GameDrawing.CreaeSphereModel(new Point3D(position.Y, 0, position.X), DEFAULT_SIZE.X, 10, 20, Colors.Blue);
         }
 
         

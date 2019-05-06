@@ -7,7 +7,7 @@ namespace Arkanoid.GameObjects
 {
     class Player : MovingGameObject
     {
-        public static double DEFAULT_SPEED = 4;
+        public static double DEFAULT_SPEED = .1;
         public static Point3D DEFAULT_SIZE = new Point3D(.5, .5, 3);
         public Player(Point3D size, Point position) : base(size, position) {
             init();
@@ -18,7 +18,7 @@ namespace Arkanoid.GameObjects
         }
 
         private void init() {
-            //centerPosition();
+            centerPosition();
             speed = DEFAULT_SPEED;
             shape.Content = GameDrawing.CreateCubeModel(new Point3D(position.Y, 0, position.X), DEFAULT_SIZE, Colors.DarkGray);
         }
