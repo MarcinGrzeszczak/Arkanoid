@@ -27,9 +27,9 @@ namespace Arkanoid
             this.controller = controller;
             this.endGameCallback = endGameCallback;
 
-            GameBorder border = new GameBorder(gameViewport.getsSize(), new Point(0, 0));
+            GameBorder border = new GameBorder(new Point(50,49), new Point(0, 0));
           
-            level = new GameLevel();
+            level = new GameLevel(border);
             gameState = new GameState(border);
         }
 
@@ -61,8 +61,7 @@ namespace Arkanoid
                         stop();
 
                     updateControls();
-                    draw();
-
+                  
                     delta--;
                 }
             }
@@ -79,15 +78,14 @@ namespace Arkanoid
 
         private void draw()
         {
-           gameViewport.draw(gameState.getObjects()[0].draw);
-            isRunning = false;
+            gameState.getObjects().ForEach((GameObject obj) => gameViewport.draw(obj.draw));
         }
 
         public void start() {
 
             level.randomLevel();
             gameState.load(level);
-           
+            draw();
 
             isRunning = true;
             Task.Factory.StartNew(() => loop(60));

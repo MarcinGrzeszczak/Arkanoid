@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -17,19 +18,24 @@ namespace Arkanoid.GameLogic
         }
 
         public Point getsSize() {
-            return new Point(viewport.ActualWidth, viewport.ActualHeight);
+            return new Point(viewport.Width, viewport.Height);
         }
         public void draw(Func<Model3DGroup> drawGameObj) {
 
             viewport.Dispatcher.Invoke(new Action(() => {
-                shape.Content = drawGameObj();
+                Model3DGroup gameObj = drawGameObj();
+                shape = new ModelVisual3D();
+                shape.Content = gameObj;
                 viewport.Children.Add(shape);
                 }));
         }
 
-        public static Model3DGroup CreateCubeModel(Point3D position, Point3D size)
+        public static Model3DGroup CreateCubeModel(Point3D position, Point3D size, Color color)
         {
             Model3DGroup cube = new Model3DGroup();
+
+            TriangleModel.color = color;
+            Func<Point3D, Point3D, Point3D, Model3DGroup> CreateTriangleModel = TriangleModel.CreateTriangleModel;
 
             Point3D p0 = new Point3D(position.X - size.X / 2, position.Y - size.Y / 2, position.Z - size.Z / 2);
             Point3D p1 = new Point3D(position.X + size.X / 2, position.Y - size.Y / 2, position.Z - size.Z / 2);
@@ -62,24 +68,29 @@ namespace Arkanoid.GameLogic
             return cube;
         }
 
-        private static Model3DGroup CreateTriangleModel(Point3D p0, Point3D p1, Point3D p2)
+       private class TriangleModel
         {
-            MeshGeometry3D mesh = new MeshGeometry3D();
-            Material material = new DiffuseMaterial(
-                new SolidColorBrush(Colors.Green));
+            public static Color color;
+            public static Model3DGroup CreateTriangleModel(Point3D p0, Point3D p1, Point3D p2)
+            {
+                MeshGeometry3D mesh = new MeshGeometry3D();
+                Material material = new DiffuseMaterial(
+                    new SolidColorBrush(color));
 
-            mesh.Positions.Add(p0);
-            mesh.Positions.Add(p1);
-            mesh.Positions.Add(p2);
+                mesh.Positions.Add(p0);
+                mesh.Positions.Add(p1);
+                mesh.Positions.Add(p2);
 
-            mesh.TriangleIndices.Add(0);
-            mesh.TriangleIndices.Add(1);
-            mesh.TriangleIndices.Add(2);
+                mesh.TriangleIndices.Add(0);
+                mesh.TriangleIndices.Add(1);
+                mesh.TriangleIndices.Add(2);
 
-            GeometryModel3D model = new GeometryModel3D(mesh, material);
-            Model3DGroup modelGroup = new Model3DGroup();
-            modelGroup.Children.Add(model);
-            return modelGroup;
+                GeometryModel3D model = new GeometryModel3D(mesh, material);
+                Model3DGroup modelGroup = new Model3DGroup();
+                modelGroup.Children.Add(model);
+                return modelGroup;
+            }
         }
+     
     }
 }

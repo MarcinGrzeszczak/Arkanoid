@@ -6,7 +6,7 @@ namespace Arkanoid.GameLogic
 {
     class GameBorder : GameObject
     {
-        public GameBorder(Point size, Point position) : base(new Point3D(size.X,size.Y,0), position) { }
+        public GameBorder(Point size, Point position) : base(new Point3D( position.X + size.X, position.Y + size.Y ,0), new Point(position.X - size.X, position.Y - size.Y )) { }
 
         public override Collision isCollided(GameObject obj)
         {

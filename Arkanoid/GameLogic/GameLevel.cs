@@ -13,6 +13,7 @@ namespace Arkanoid.GameLogic
         private Ball ball;
         private Random rand;
         private Color backgorundColor;
+        private GameBorder border;
         struct RGB
         {
             private Random rand;
@@ -31,8 +32,9 @@ namespace Arkanoid.GameLogic
             }
         }
 
-        public GameLevel()
+        public GameLevel(GameBorder border)
         {
+            this.border = border;
             rand = new Random();
         }
 
@@ -43,14 +45,14 @@ namespace Arkanoid.GameLogic
 
         public void randomLevel()
         {
-            player = new Player(new Point(200,700));
-            
+            player = new Player(new Point(0,6));
+
             // TODO: Udostepnic publicznie size obiektow
             ball = new Ball(new Point(200 + Player.DEFAULT_SIZE.X / 2, 700 - Ball.DEFAULT_SIZE.Y- 1));
             bricks = new List<Brick>();
             backgorundColor = Colors.DarkCyan;
 
-            Point position = new Point(0, 0);
+            Point position = new Point(7 ,-6);
             RGB randRGB = new RGB(rand);
 
             for (int row = 0; row < 4; ++row)
@@ -65,11 +67,11 @@ namespace Arkanoid.GameLogic
                         )
                     );
 
-                    position.X += Brick.DEFAULT_SIZE.X;
+                    position.X -= Brick.DEFAULT_SIZE.Z;
                 }
 
                 position.Y += Brick.DEFAULT_SIZE.Y;
-                position.X = 0;
+                position.X = 7;
             }
             
         }

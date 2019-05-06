@@ -1,5 +1,6 @@
 ﻿using Arkanoid.GameLogic;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
 namespace Arkanoid.GameObjects
@@ -7,7 +8,7 @@ namespace Arkanoid.GameObjects
     class Player : MovingGameObject
     {
         public static double DEFAULT_SPEED = 4;
-        public static Point3D DEFAULT_SIZE = new Point3D(100, 20, 4);
+        public static Point3D DEFAULT_SIZE = new Point3D(.5, .5, 3);
         public Player(Point3D size, Point position) : base(size, position) {
             init();
         }
@@ -17,12 +18,12 @@ namespace Arkanoid.GameObjects
         }
 
         private void init() {
-            centerPosition();
+            //centerPosition();
             speed = DEFAULT_SPEED;
         }
 
         public override Model3DGroup draw() {
-            return GameDrawing.CreateCubeModel(new Point3D(position.X, position.Y, 0), DEFAULT_SIZE);
+            return GameDrawing.CreateCubeModel(new Point3D(position.Y, 0, position.X), DEFAULT_SIZE, Colors.DarkGray);
         }
 
         public override void restartPosition()
