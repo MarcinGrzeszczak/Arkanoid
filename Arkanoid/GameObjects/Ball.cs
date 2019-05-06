@@ -42,7 +42,7 @@ namespace Arkanoid.GameObjects
             movement.left = false;
             movement.right = false;
 
-            shape.Content = GameDrawing.CreaeSphereModel(new Point3D(position.Y, 0, position.X), DEFAULT_SIZE.X, 10, 20, Colors.Blue);
+            shape.Content = GameDrawing.CreaeSphereModel(new Point3D(0, 0, 0), DEFAULT_SIZE.X, 10, 20, Colors.Blue);
         }
 
         

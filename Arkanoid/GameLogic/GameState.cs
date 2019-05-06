@@ -13,6 +13,8 @@ namespace Arkanoid
 
         private GameBorder border;
         private List<Brick> bricks;
+        private List<GameObject> removedObjects;
+
         private Player player;
         private Ball ball;
         public int currentLives;
@@ -40,7 +42,13 @@ namespace Arkanoid
             if (currentLives > 1)
                 --currentLives;
             else
-                endgame = true;
+                gotEndgame();
+        }
+
+        private void gotEndgame() {
+            removedObjects = getObjects();
+            getObjects().Clear();
+            endgame = true;
         }
 
         public void update(double delta, GameController.KeyFlags controllerKeyFlags) {
@@ -58,11 +66,11 @@ namespace Arkanoid
                 ball.reactToCollision(ball.isCollided(player));
 
                 Collision isCollidedWithBorder = border.isCollided(ball);
-                //if (isCollidedWithBorder == Collision.DOWN) {
-                    //loseLive();
-                //}
-                //else
-                  //  ball.reactToCollision(isCollidedWithBorder);
+                if (isCollidedWithBorder == Collision.DOWN) {
+                    loseLive();
+                }
+                else
+                    ball.reactToCollision(isCollidedWithBorder);
 
                 for (int brickIndex = 0; brickIndex < bricks.Count; ++brickIndex) {
                     Collision isCollidedWithBrick = ball.isCollided(bricks[brickIndex]);
@@ -70,12 +78,14 @@ namespace Arkanoid
 
                     if(isCollidedWithBrick != Collision.NONE) {
                         addScore(Brick.POINTS);
+
+                        removedObjects.Add(bricks[brickIndex]);
                         bricks.RemoveAt(brickIndex);
                     }
                 }
 
                 if(bricks.Count <= 0) {
-                    endgame = true;
+                    gotEndgame();
                     isWin = true;
                 }
             }
@@ -98,6 +108,11 @@ namespace Arkanoid
             ball = level.getBall();
         }
 
+
+        public List<GameObject> getRemovedObjects() {
+            return removedObjects;
+        }
+
         public List<GameObject> getObjects()
         {
             List<GameObject> allObjects = bricks.Cast<GameObject>().ToList();
@@ -115,6 +130,7 @@ namespace Arkanoid
             endgame = false;
             isWin = false;
             bricks = new List<Brick>();
+            removedObjects = new List<GameObject>();
             score = 0;
             currentLives = DEFAULT_LIVES;
            

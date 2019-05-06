@@ -15,13 +15,14 @@ namespace Arkanoid.GameObjects
 
         protected double speed;
         public MoveDir movement;
+        private Point originalPosition;
       
         public MovingGameObject(Point3D size, Point position) : base(size, position) {
-            restartPosition();
+            originalPosition = position;
         }
 
         public virtual void restartPosition(){
-            translatedPosition = new Point(0, 0);
+            position = originalPosition;
         }
 
         public void updateXaxisMovement(bool left, bool right) {
@@ -35,11 +36,6 @@ namespace Arkanoid.GameObjects
             movement.down = down;
         }
 
-        public override void refreshShape()
-        {
-            shape.Transform = new TranslateTransform3D(translatedPosition.Y, 0, translatedPosition.X);
-        }
-
         public virtual void reactToCollision(Collision collision) {}
 
         public virtual void update(double delta)
@@ -47,14 +43,14 @@ namespace Arkanoid.GameObjects
             double currentSpeed = speed / delta;
 
             if (movement.left)
-                translatedPosition.X += currentSpeed;
+                position.X += currentSpeed;
             if (movement.right)
-                translatedPosition.X -= currentSpeed;
+                position.X -= currentSpeed;
 
             if (movement.up)
-                translatedPosition.Y -= currentSpeed;
+                position.Y -= currentSpeed;
             if (movement.down)
-                translatedPosition.Y += currentSpeed;
+                position.Y += currentSpeed;
 
            
             

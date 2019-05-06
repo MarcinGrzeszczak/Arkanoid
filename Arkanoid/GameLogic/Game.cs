@@ -4,7 +4,6 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace Arkanoid
 {
@@ -27,7 +26,7 @@ namespace Arkanoid
             this.controller = controller;
             this.endGameCallback = endGameCallback;
 
-            GameBorder border = new GameBorder(new Point(7,7), new Point(-7, -7));
+            GameBorder border = new GameBorder(new Point(7, 7), new Point(-7, -7));
           
             level = new GameLevel(border);
             gameState = new GameState(border);
@@ -77,6 +76,9 @@ namespace Arkanoid
         }
 
         private void refreshViewport(){
+            gameState.getRemovedObjects().ForEach((GameObject obj) => gameViewport.removeShape(obj.getShape));
+            gameState.getRemovedObjects().Clear();
+
             gameState.getObjects().ForEach((GameObject obj) => gameViewport.refresh(obj.refreshShape));
         }
 

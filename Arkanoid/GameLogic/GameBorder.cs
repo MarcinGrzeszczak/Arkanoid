@@ -12,16 +12,16 @@ namespace Arkanoid.GameLogic
         {
             obj.updateBorder();
 
-            if (size.X <= obj.translatedPosition.X + obj.size.Z )
+            if (size.X <= obj.position.X + obj.size.Z )
                 return Collision.LEFT;
 
-            if (position.X >= obj.translatedPosition.X - obj.size.Z)
+            if (position.X >= obj.position.X - obj.size.Z)
                 return Collision.RIGHT;
 
-            if (position.Y >= obj.border.top)
+            if (position.Y >= obj.position.Y - obj.size.X)
                 return Collision.UP;
 
-            if (position.Y + size.Y <= obj.border.bottom)
+            if (size.Y <= obj.position.Y - obj.size.X)
                 return Collision.DOWN;
 
             return Collision.NONE;

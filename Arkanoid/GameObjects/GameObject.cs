@@ -13,16 +13,15 @@ namespace Arkanoid.GameObjects
         public Border border;
         public Point3D size;
         public Point position;
-        public Point translatedPosition;
         protected ModelVisual3D shape;
 
         public void updateBorder()
         {
-            border.left = position.X - size.X / 2;
-            border.right = position.X + size.X / 2;
+            border.left = position.X - size.Z ;
+            border.right = position.X + size.Z ;
 
-            border.top = position.Y - size.Y / 2;
-            border.bottom = position.Y + size.Y / 2;
+            border.top = position.Y - size.X;
+            border.bottom = position.Y + size.X ;
         }
 
         public GameObject(Point3D size, Point position)
@@ -30,6 +29,11 @@ namespace Arkanoid.GameObjects
             shape = new ModelVisual3D();
             this.size = size;
             this.position = position;
+        }
+
+        public ModelVisual3D getShape()
+        {
+            return shape;
         }
 
         public virtual Collision isCollided(GameObject obj) {
@@ -53,13 +57,13 @@ namespace Arkanoid.GameObjects
                 if (border.left <= obj.border.right && border.left >= obj.position.X)
                     return Collision.LEFT;
             }
-        
+            
             return Collision.NONE;
         }
 
-        public virtual void refreshShape()
+        public void refreshShape()
         {
-            shape.Transform = new TranslateTransform3D(0, 0, 0);
+            shape.Transform = new TranslateTransform3D(position.Y, 0, position.X);
         }
 
         public virtual ModelVisual3D draw() { return shape; }

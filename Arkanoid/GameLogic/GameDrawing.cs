@@ -32,6 +32,13 @@ namespace Arkanoid.GameLogic
             });
         }
 
+        public void removeShape(Func<ModelVisual3D> objShape) {
+            viewport.Dispatcher.Invoke(() =>
+            {
+                viewport.Children.Remove(objShape());
+            });
+        }
+
         public static Model3DGroup CreateCubeModel(Point3D position, Point3D size, Color color)
         {
             Model3DGroup cube = new Model3DGroup();
