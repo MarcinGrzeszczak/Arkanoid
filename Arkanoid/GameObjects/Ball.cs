@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Media;
+using System.Windows.Media.Media3D;
 
 namespace Arkanoid.GameObjects
 {
@@ -8,9 +8,9 @@ namespace Arkanoid.GameObjects
 
         private static double DEFAULT_SPEED = 10;
         private Random rand;
-        public static Point DEFAULT_SIZE = new Point(7, 7);
+        public static Point3D DEFAULT_SIZE = new Point3D(7, 7, 7);
         public bool isSticked;
-        public Ball(Point size, Point position) : base(size, position)
+        public Ball(Point3D size, Point position) : base(size, position)
         {
             init();
         }
@@ -41,12 +41,8 @@ namespace Arkanoid.GameObjects
             movement.right = false;
         }
 
-        public override void draw(DrawingContext dc)
-        {
-            SolidColorBrush brush = new SolidColorBrush();
-            brush.Color = Colors.White;
-
-            dc.DrawEllipse(brush, null, position, size.X, size.Y);
+        public override Model3DGroup draw() {
+            return null;
         }
 
         public override void reactToCollision(Collision collision) {

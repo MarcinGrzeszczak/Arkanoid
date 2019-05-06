@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using System.Windows.Media;
+using System.Windows.Media.Media3D;
 
 namespace Arkanoid.GameObjects
 {
@@ -11,7 +11,7 @@ namespace Arkanoid.GameObjects
         public enum Collision { LEFT, RIGHT, UP, DOWN, NONE }
 
         public Border border;
-        public Point size;
+        public Point3D size;
         protected Point startPosition;
         public Point position;
       
@@ -25,7 +25,7 @@ namespace Arkanoid.GameObjects
             border.bottom = position.Y + size.Y / 2;
         }
 
-        public GameObject(Point size, Point position)
+        public GameObject(Point3D size, Point position)
         {
             this.size = size;
             this.position = position;
@@ -58,7 +58,7 @@ namespace Arkanoid.GameObjects
         }
 
 
-        public virtual void draw(DrawingContext dc) { }
+        public virtual Model3DGroup draw() { return null; }
 
         protected void centerPosition (){
             position.X = position.X + size.X / 2;

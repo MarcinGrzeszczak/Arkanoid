@@ -1,6 +1,8 @@
 ﻿
+using Arkanoid.GameLogic;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Media3D;
 
 namespace Arkanoid.GameObjects
 {
@@ -8,11 +10,11 @@ namespace Arkanoid.GameObjects
     {
         public enum STRENGTH_LEVEL{ LOW, MEDIUM, HEIGHT };
         public static int POINTS = 10;
-        public static Point DEFAULT_SIZE = new Point(50, 25);
+        public static Point3D DEFAULT_SIZE = new Point3D(3, 2, 2);
 
         private Color brickColor;
 
-        public Brick(Point size, Point position, Color brickColor): base(size, position)
+        public Brick(Point3D size, Point position, Color brickColor): base(size, position)
         {
             init(brickColor);
         }
@@ -27,12 +29,9 @@ namespace Arkanoid.GameObjects
             centerPosition();
             this.brickColor = brickColor;
         }
-        public override void draw(DrawingContext dc)
+        public override Model3DGroup draw()
         {
-            SolidColorBrush brush = new SolidColorBrush();
-            brush.Color = brickColor;
-
-            dc.DrawRectangle(brush, null, new Rect(position.X - size.X /2, position.Y - size.Y/2, size.X, size.Y));
+            return GameDrawing.CreateCubeModel(new Point3D(position.X, position.Y, 0), DEFAULT_SIZE);
         }
     }
 }

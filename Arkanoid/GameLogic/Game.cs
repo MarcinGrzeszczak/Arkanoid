@@ -51,7 +51,7 @@ namespace Arkanoid
             while (isRunning)
             {
                 long now = Environment.TickCount;
-                delta += (now - last) / delay;
+                delta += (now - last) / delay;  
                 last = now;
 
                 while (delta >= 1)
@@ -61,6 +61,8 @@ namespace Arkanoid
                         stop();
 
                     updateControls();
+                    draw();
+
                     delta--;
                 }
             }
@@ -75,9 +77,10 @@ namespace Arkanoid
 
         }
 
-        private void draw(DrawingContext dc)
+        private void draw()
         {
-            gameState.getObjects().ForEach((GameObject obj) => obj.draw(dc));
+           gameViewport.draw(gameState.getObjects()[0].draw);
+            isRunning = false;
         }
 
         public void start() {

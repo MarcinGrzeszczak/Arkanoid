@@ -9,35 +9,36 @@ namespace Arkanoid.GameLogic
     class GameDrawing
     {
         private Viewport3D viewport;
-
+        private ModelVisual3D shape;
         public GameDrawing(Viewport3D viewport)
         {
+            shape = new ModelVisual3D();
             this.viewport = viewport;
         }
 
         public Point getsSize() {
             return new Point(viewport.ActualWidth, viewport.ActualHeight);
         }
-        public void draw(Model3DGroup obj) {
-            viewport.Dispatcher.Invoke(() => {
-                ModelVisual3D shape = new ModelVisual3D();
-                shape.Content = obj;
+        public void draw(Func<Model3DGroup> drawGameObj) {
+
+            viewport.Dispatcher.Invoke(new Action(() => {
+                shape.Content = drawGameObj();
                 viewport.Children.Add(shape);
-                });
+                }));
         }
 
-        public static Model3DGroup CreateCubeModel(double x, double y, double z, double sizeX, double sizeY, double sizeZ)
+        public static Model3DGroup CreateCubeModel(Point3D position, Point3D size)
         {
             Model3DGroup cube = new Model3DGroup();
 
-            Point3D p0 = new Point3D(x - sizeX / 2, y - sizeY / 2, z - sizeZ / 2);
-            Point3D p1 = new Point3D(x + sizeX / 2, y - sizeY / 2, z - sizeZ / 2);
-            Point3D p2 = new Point3D(x + sizeX / 2, y - sizeY / 2, z + sizeZ / 2);
-            Point3D p3 = new Point3D(x - sizeX / 2, y - sizeY / 2, z + sizeZ / 2);
-            Point3D p4 = new Point3D(x - sizeX / 2, y + sizeY / 2, z - sizeZ / 2);
-            Point3D p5 = new Point3D(x + sizeX / 2, y + sizeY / 2, z - sizeZ / 2);
-            Point3D p6 = new Point3D(x + sizeX / 2, y + sizeY / 2, z + sizeZ / 2);
-            Point3D p7 = new Point3D(x - sizeX / 2, y + sizeY / 2, z + sizeZ / 2);
+            Point3D p0 = new Point3D(position.X - size.X / 2, position.Y - size.Y / 2, position.Z - size.Z / 2);
+            Point3D p1 = new Point3D(position.X + size.X / 2, position.Y - size.Y / 2, position.Z - size.Z / 2);
+            Point3D p2 = new Point3D(position.X + size.X / 2, position.Y - size.Y / 2, position.Z + size.Z / 2);
+            Point3D p3 = new Point3D(position.X - size.X / 2, position.Y - size.Y / 2, position.Z + size.Z / 2);
+            Point3D p4 = new Point3D(position.X - size.X / 2, position.Y + size.Y / 2, position.Z - size.Z / 2);
+            Point3D p5 = new Point3D(position.X + size.X / 2, position.Y + size.Y / 2, position.Z - size.Z / 2);
+            Point3D p6 = new Point3D(position.X + size.X / 2, position.Y + size.Y / 2, position.Z + size.Z / 2);
+            Point3D p7 = new Point3D(position.X - size.X / 2, position.Y + size.Y / 2, position.Z + size.Z / 2);
 
             //front side triangles
             cube.Children.Add(CreateTriangleModel(p3, p2, p6));

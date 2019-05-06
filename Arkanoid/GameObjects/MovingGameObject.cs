@@ -1,5 +1,5 @@
-﻿using Arkanoid.GameLogic;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Media.Media3D;
 
 namespace Arkanoid.GameObjects
 {
@@ -17,7 +17,7 @@ namespace Arkanoid.GameObjects
         public MoveDir movement;
         protected double[] acceleration = { 0, 0 };
 
-        public MovingGameObject(Point size, Point position) : base(size, position) { }
+        public MovingGameObject(Point3D size, Point position) : base(size, position) { }
 
         public virtual void restartPosition(){
             position = startPosition;

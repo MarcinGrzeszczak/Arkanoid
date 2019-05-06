@@ -1,13 +1,14 @@
-﻿using System.Windows;
-using System.Windows.Media;
+﻿using Arkanoid.GameLogic;
+using System.Windows;
+using System.Windows.Media.Media3D;
 
 namespace Arkanoid.GameObjects
 {
     class Player : MovingGameObject
     {
         public static double DEFAULT_SPEED = 4;
-        public static Point DEFAULT_SIZE = new Point(100, 20);
-        public Player(Point size, Point position) : base(size, position) {
+        public static Point3D DEFAULT_SIZE = new Point3D(100, 20, 4);
+        public Player(Point3D size, Point position) : base(size, position) {
             init();
         }
 
@@ -20,12 +21,8 @@ namespace Arkanoid.GameObjects
             speed = DEFAULT_SPEED;
         }
 
-        public override void draw(DrawingContext dc) {
-            SolidColorBrush brush = new SolidColorBrush();
-            brush.Color = Colors.Black;
-
-            //TODO: Przeniesc gdzies indziej obliczanie oryginalnej pozycji
-            dc.DrawRoundedRectangle(brush, null, new Rect(position.X - size.X /2, position.Y - size.Y / 2, size.X, size.Y), 10, 10);
+        public override Model3DGroup draw() {
+            return GameDrawing.CreateCubeModel(new Point3D(position.X, position.Y, 0), DEFAULT_SIZE);
         }
 
         public override void restartPosition()
