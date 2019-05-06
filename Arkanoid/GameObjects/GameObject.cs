@@ -14,8 +14,9 @@ namespace Arkanoid.GameObjects
         public Point3D size;
         protected Point startPosition;
         public Point position;
-      
-     
+
+        protected ModelVisual3D shape;
+
         public void updateBorder()
         {
             border.left = position.X - size.X / 2;
@@ -27,6 +28,7 @@ namespace Arkanoid.GameObjects
 
         public GameObject(Point3D size, Point position)
         {
+            shape = new ModelVisual3D();
             this.size = size;
             this.position = position;
             this.startPosition = position;
@@ -58,7 +60,7 @@ namespace Arkanoid.GameObjects
         }
 
 
-        public virtual Model3DGroup draw() { return null; }
+        public virtual ModelVisual3D draw() { return shape; }
 
         protected void centerPosition (){
             position.X = position.X + size.X / 2;

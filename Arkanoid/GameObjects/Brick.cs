@@ -28,10 +28,7 @@ namespace Arkanoid.GameObjects
         private void init(Color brickColor){
             //centerPosition();
             this.brickColor = brickColor;
-        }
-        public override Model3DGroup draw()
-        {
-             return GameDrawing.CreateCubeModel(new Point3D(position.Y,0, position.X), DEFAULT_SIZE, brickColor);
+            shape.Content = GameDrawing.CreateCubeModel(new Point3D(position.Y, 0, position.X), DEFAULT_SIZE, brickColor); ;
         }
     }
 }

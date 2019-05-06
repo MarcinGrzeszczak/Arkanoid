@@ -20,10 +20,7 @@ namespace Arkanoid.GameObjects
         private void init() {
             //centerPosition();
             speed = DEFAULT_SPEED;
-        }
-
-        public override Model3DGroup draw() {
-            return GameDrawing.CreateCubeModel(new Point3D(position.Y, 0, position.X), DEFAULT_SIZE, Colors.DarkGray);
+            shape.Content = GameDrawing.CreateCubeModel(new Point3D(position.Y, 0, position.X), DEFAULT_SIZE, Colors.DarkGray);
         }
 
         public override void restartPosition()

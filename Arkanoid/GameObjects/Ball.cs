@@ -41,10 +41,7 @@ namespace Arkanoid.GameObjects
             movement.right = false;
         }
 
-        public override Model3DGroup draw() {
-            return null;
-        }
-
+        
         public override void reactToCollision(Collision collision) {
             switch (collision){
                 case Collision.LEFT: updateXaxisMovement(false, true); break;

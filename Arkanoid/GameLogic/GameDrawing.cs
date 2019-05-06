@@ -10,23 +10,18 @@ namespace Arkanoid.GameLogic
     class GameDrawing
     {
         private Viewport3D viewport;
-        private ModelVisual3D shape;
         public GameDrawing(Viewport3D viewport)
         {
-            shape = new ModelVisual3D();
             this.viewport = viewport;
         }
 
         public Point getsSize() {
             return new Point(viewport.Width, viewport.Height);
         }
-        public void draw(Func<Model3DGroup> drawGameObj) {
+        public void draw(Func<ModelVisual3D> drawGameObj) {
 
             viewport.Dispatcher.Invoke(new Action(() => {
-                Model3DGroup gameObj = drawGameObj();
-                shape = new ModelVisual3D();
-                shape.Content = gameObj;
-                viewport.Children.Add(shape);
+                viewport.Children.Add(drawGameObj());
                 }));
         }
 
