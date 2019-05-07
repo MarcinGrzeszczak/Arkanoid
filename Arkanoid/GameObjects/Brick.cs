@@ -1,6 +1,6 @@
 ﻿
-using System.Windows;
-using System.Windows.Media;
+using System.Drawing;
+using Arkanoid.GameLogic;
 
 namespace Arkanoid.GameObjects
 {
@@ -21,18 +21,17 @@ namespace Arkanoid.GameObjects
         {
             init(brickColor);
            
+           
         }
+        
 
         private void init(Color brickColor){
             centerPosition();
             this.brickColor = brickColor;
         }
-        public override void draw(DrawingContext dc)
+        public override void draw()
         {
-            SolidColorBrush brush = new SolidColorBrush();
-            brush.Color = brickColor;
-
-            dc.DrawRectangle(brush, null, new Rect(position.X - size.X /2, position.Y - size.Y/2, size.X, size.Y));
+          
         }
     }
 }

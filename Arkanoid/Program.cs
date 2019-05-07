@@ -10,6 +10,9 @@ namespace Arkanoid
     {
         static void Main(string[] args)
         {
+            while (true) { 
+
+            }
         }
     }
 }

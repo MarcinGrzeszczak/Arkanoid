@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameLogic\Color.cs" />
+    <Compile Include="GameLogic\Point.cs" />
     <Compile Include="GameLogic\Game.cs" />
     <Compile Include="GameLogic\GameBorder.cs" />
     <Compile Include="GameLogic\GameCanvas.cs" />

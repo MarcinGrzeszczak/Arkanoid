@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Media;
+﻿using Arkanoid.GameLogic;
 
 namespace Arkanoid.GameObjects
 {
@@ -58,7 +57,7 @@ namespace Arkanoid.GameObjects
         }
 
 
-        public virtual void draw(DrawingContext dc) { }
+        public virtual void draw() { }
 
         protected void centerPosition (){
             position.X = position.X + size.X / 2;

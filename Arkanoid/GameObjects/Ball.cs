@@ -1,6 +1,5 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Media;
+﻿using Arkanoid.GameLogic;
+using System;
 
 namespace Arkanoid.GameObjects
 {
@@ -41,12 +40,8 @@ namespace Arkanoid.GameObjects
             movement.right = false;
         }
 
-        public override void draw(DrawingContext dc)
-        {
-            SolidColorBrush brush = new SolidColorBrush();
-            brush.Color = Colors.White;
-
-            dc.DrawEllipse(brush, null, position, size.X, size.Y);
+        public override void draw()
+        { 
         }
 
         public override void reactToCollision(Collision collision) {

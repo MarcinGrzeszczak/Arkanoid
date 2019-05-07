@@ -1,5 +1,6 @@
-﻿using System.Windows;
-using System.Windows.Media;
+﻿
+
+using Arkanoid.GameLogic;
 
 namespace Arkanoid.GameObjects
 {
@@ -20,12 +21,8 @@ namespace Arkanoid.GameObjects
             speed = DEFAULT_SPEED;
         }
 
-        public override void draw(DrawingContext dc) {
-            SolidColorBrush brush = new SolidColorBrush();
-            brush.Color = Colors.Black;
-
-            //TODO: Przeniesc gdzies indziej obliczanie oryginalnej pozycji
-            dc.DrawRoundedRectangle(brush, null, new Rect(position.X - size.X /2, position.Y - size.Y / 2, size.X, size.Y), 10, 10);
+        public override void draw() {
+          
         }
 
         public override void restartPosition()

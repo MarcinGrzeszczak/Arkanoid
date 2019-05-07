@@ -28,22 +28,6 @@ namespace Arkanoid.GameLogic
 
         public KeyFlags getKeyFlags() => flags;
 
-        public void keyDownEvent(object sender, KeyEventArgs e)
-        {
-            switch (e.Key) {
-                case Key.A: flags.isPressedLeft = true; break;
-                case Key.D: flags.isPressedRight = true; break;
-                case Key.Space: flags.isPressedSpace = true; break;
-            }
-        }
-
-        public void keyUpEvent(object sender, KeyEventArgs e)
-        {
-            switch (e.Key) {
-                case Key.A: flags.isPressedLeft = false; break;
-                case Key.D: flags.isPressedRight = false; break;
-                case Key.Space: flags.isPressedSpace = false; break;
-            }
-        }
+     
     }
 }
