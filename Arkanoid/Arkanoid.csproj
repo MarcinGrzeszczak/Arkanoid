@@ -43,6 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameLogic\Game.cs" />
+    <Compile Include="GameLogic\GameBorder.cs" />
+    <Compile Include="GameLogic\GameCanvas.cs" />
+    <Compile Include="GameLogic\GameController.cs" />
+    <Compile Include="GameLogic\GameLevel.cs" />
+    <Compile Include="GameLogic\GameState.cs" />
+    <Compile Include="GameObjects\Ball.cs" />
+    <Compile Include="GameObjects\Brick.cs" />
+    <Compile Include="GameObjects\GameObject.cs" />
+    <Compile Include="GameObjects\MovingGameObject.cs" />
+    <Compile Include="GameObjects\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
