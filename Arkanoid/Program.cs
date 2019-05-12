@@ -10,9 +10,8 @@ namespace Arkanoid
     {
         static void Main(string[] args)
         {
-            while (true) { 
-
-            }
+            Game game = new Game(200,300,null,null);
+            game.start();
         }
     }
 }

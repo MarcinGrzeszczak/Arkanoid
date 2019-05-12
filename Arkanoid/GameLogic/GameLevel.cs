@@ -22,24 +22,24 @@ namespace Arkanoid.GameLogic
     
         public void randomLevel()
         {
-            player = new Player(new Point(200,700));
+            player = new Player(new Point(10,15));
             
             // TODO: Udostepnic publicznie size obiektow
-            ball = new Ball(new Point(200 + Player.DEFAULT_SIZE.X / 2, 700 - Ball.DEFAULT_SIZE.Y- 1));
+            ball = new Ball(new Point(10,14));
             bricks = new List<Brick>();
           
 
-            Point position = new Point(0, 0);
-
+            Point position = new Point(1, 1);
+            color = new Color();
             for (int row = 0; row < 4; ++row)
             {
                 for (int column = 0; column < 10; ++column)
                 {
-                    color = new Color();
+                   
                     color.randomColor();
                     bricks.Add(new Brick(
                         position,
-                        color
+                        color.getColor()
                         )
                     );
                     
@@ -48,7 +48,7 @@ namespace Arkanoid.GameLogic
                 }
 
                 position.Y += Brick.DEFAULT_SIZE.Y;
-                position.X = 0;
+                position.X = 1;
             }
             
         }

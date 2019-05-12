@@ -1,6 +1,5 @@
-﻿
-using System.Drawing;
-using Arkanoid.GameLogic;
+﻿using Arkanoid.GameLogic;
+using System;
 
 namespace Arkanoid.GameObjects
 {
@@ -8,30 +7,26 @@ namespace Arkanoid.GameObjects
     {
         public enum STRENGTH_LEVEL{ LOW, MEDIUM, HEIGHT };
         public static int POINTS = 10;
-        public static Point DEFAULT_SIZE = new Point(50, 25);
+        public static Point DEFAULT_SIZE = new Point(4, 1);
 
-        private Color brickColor;
-
-        public Brick(Point size, Point position, Color brickColor): base(size, position)
+        public Brick(Point size, Point position, ConsoleColor brickColor): base(size, position)
         {
             init(brickColor);
         }
 
-        public Brick(Point position, Color brickColor) :base(DEFAULT_SIZE, position)
+        public Brick(Point position, ConsoleColor brickColor) :base(DEFAULT_SIZE, position)
         {
-            init(brickColor);
-           
-           
+            init(brickColor);    
         }
         
 
-        private void init(Color brickColor){
+        private void init(ConsoleColor brickColor){
             centerPosition();
-            this.brickColor = brickColor;
+            color = brickColor;
         }
-        public override void draw()
+        public override string draw()
         {
-          
+            return "████";
         }
     }
 }

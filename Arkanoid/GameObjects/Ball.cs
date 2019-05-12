@@ -7,7 +7,7 @@ namespace Arkanoid.GameObjects
 
         private static double DEFAULT_SPEED = 10;
         private Random rand;
-        public static Point DEFAULT_SIZE = new Point(7, 7);
+        public static Point DEFAULT_SIZE = new Point(1, 1);
         public bool isSticked;
         public Ball(Point size, Point position) : base(size, position)
         {
@@ -29,6 +29,7 @@ namespace Arkanoid.GameObjects
 
         private void init()
         {
+            color = ConsoleColor.Blue;
             rand = new Random();
            
             speed = DEFAULT_SPEED;
@@ -40,8 +41,9 @@ namespace Arkanoid.GameObjects
             movement.right = false;
         }
 
-        public override void draw()
-        { 
+        public override string draw()
+        {
+            return "■";
         }
 
         public override void reactToCollision(Collision collision) {

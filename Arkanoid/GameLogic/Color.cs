@@ -18,10 +18,16 @@ namespace Arkanoid.GameLogic
         };
 
         private ConsoleColor color;
-        private static Random rand = new Random();
+        private Random rand;
+
+        public Color(){
+            rand = new Random();
+        }
 
         public void randomColor() {
-            color = consoleColors[rand.Next(0, consoleColors.Length)];
+            int t = rand.Next(0, consoleColors.Length-1);
+            color = consoleColors[t];
+            
         }
 
         public ConsoleColor getColor()

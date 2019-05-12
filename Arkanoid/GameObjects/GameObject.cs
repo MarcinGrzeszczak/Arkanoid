@@ -1,4 +1,5 @@
 ﻿using Arkanoid.GameLogic;
+using System;
 
 namespace Arkanoid.GameObjects
 {
@@ -13,8 +14,8 @@ namespace Arkanoid.GameObjects
         public Point size;
         protected Point startPosition;
         public Point position;
-      
-     
+        public ConsoleColor color;
+
         public void updateBorder()
         {
             border.left = position.X - size.X / 2;
@@ -57,7 +58,7 @@ namespace Arkanoid.GameObjects
         }
 
 
-        public virtual void draw() { }
+        public virtual string draw() { return ""; }
 
         protected void centerPosition (){
             position.X = position.X + size.X / 2;
