@@ -21,8 +21,8 @@ namespace Arkanoid
             this.controller = controller;
             this.endGameCallback = endGameCallback;
 
-            GameBorder border = new GameBorder(new Point(width, height), new Point(0, 0));
-          
+            GameBorder border = new GameBorder(new Point(Console.WindowWidth, Console.WindowHeight), new Point(0, 0));
+            
             level = new GameLevel();
             gameState = new GameState(border);
         }
@@ -30,28 +30,34 @@ namespace Arkanoid
         private void loop(double fps)
         {
             double delay = 1000 / fps;
-           
+            refreshConsole(true);
             while (isRunning)
-            { 
-                //gameState.update(delta, controller.getKeyFlags());
+            {
+                
+                controller.update();
+                gameState.update(delay, controller.getKeyFlags());
                 refreshConsole();
 
-                Thread.Sleep((int) delay);
+                Thread.Sleep(60);
             }
         }
 
-        private void refreshConsole(){
-            gameState.getObjects().ForEach((GameObject obj) => GameDrawing.refresh(obj));
+        private void refreshConsole(bool firstRun = false){
+            gameState.getObjects().ForEach((GameObject obj) => {
+                if (obj.isRemoved)
+                    GameDrawing.clear(obj);
+                else
+                    GameDrawing.refresh(obj, firstRun);
+                });
         }
 
         public void start() {
 
             level.randomLevel();
             gameState.load(level);
-            //gameCanvas.setBackground(level.getBackgourndColor());
 
             isRunning = true;
-            loop(1);
+            loop(30);
         }
 
         public void stop()

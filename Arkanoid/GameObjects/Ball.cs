@@ -5,7 +5,7 @@ namespace Arkanoid.GameObjects
 {
     class Ball : MovingGameObject {
 
-        private static double DEFAULT_SPEED = 10;
+        private static double DEFAULT_SPEED = 15;
         private Random rand;
         public static Point DEFAULT_SIZE = new Point(1, 1);
         public bool isSticked;
@@ -44,6 +44,11 @@ namespace Arkanoid.GameObjects
         public override string draw()
         {
             return "■";
+        }
+
+        public override string clear()
+        {
+            return " ";
         }
 
         public override void reactToCollision(Collision collision) {

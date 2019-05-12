@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Arkanoid.GameLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,8 @@ namespace Arkanoid
     {
         static void Main(string[] args)
         {
-            Game game = new Game(200,300,null,null);
+            GameController controller = new GameController();
+            Game game = new Game(200,300,controller,null);
             game.start();
         }
     }

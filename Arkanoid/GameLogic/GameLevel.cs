@@ -25,7 +25,7 @@ namespace Arkanoid.GameLogic
             player = new Player(new Point(10,15));
             
             // TODO: Udostepnic publicznie size obiektow
-            ball = new Ball(new Point(10,14));
+            ball = new Ball(new Point(12,14));
             bricks = new List<Brick>();
           
 

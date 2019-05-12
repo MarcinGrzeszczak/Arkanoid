@@ -44,7 +44,7 @@ namespace Arkanoid
         }
 
         public void update(double delta, GameController.KeyFlags controllerKeyFlags) {
-
+          
            player.updateXaxisMovement(
                 controllerKeyFlags.isPressedLeft, 
                 controllerKeyFlags.isPressedRight);
@@ -65,12 +65,19 @@ namespace Arkanoid
                     ball.reactToCollision(isCollidedWithBorder);
 
                 for (int brickIndex = 0; brickIndex < bricks.Count; ++brickIndex) {
+                    if (bricks[brickIndex].isRemoved)
+                        bricks.RemoveAt(brickIndex);
+                }
+
+                for (int brickIndex = 0; brickIndex < bricks.Count; ++brickIndex) {
+                   
                     Collision isCollidedWithBrick = ball.isCollided(bricks[brickIndex]);
                     ball.reactToCollision(isCollidedWithBrick);
 
                     if(isCollidedWithBrick != Collision.NONE) {
                         addScore(Brick.POINTS);
-                        bricks.RemoveAt(brickIndex);
+                        //bricks.RemoveAt(brickIndex);
+                        bricks[brickIndex].isRemoved = true;
                     }
                 }
 

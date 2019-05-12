@@ -14,5 +14,11 @@ namespace Arkanoid.GameLogic
             this.X = X;
             this.Y = Y;
         }
+
+        public bool equalTo(Point point){
+            if (this.X == point.X && this.Y == point.Y)
+                return true;
+            return false;
+        }
     };
 }

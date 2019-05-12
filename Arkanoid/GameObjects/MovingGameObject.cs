@@ -21,6 +21,7 @@ namespace Arkanoid.GameObjects
 
         public virtual void restartPosition(){
             position = startPosition;
+            
         }
 
         public void updateXaxisMovement(bool left, bool right) {
@@ -36,6 +37,7 @@ namespace Arkanoid.GameObjects
 
         private void updatePosition()
         {
+            prevPosition = position;
             position.X += acceleration[0];
             position.Y += acceleration[1];
         }

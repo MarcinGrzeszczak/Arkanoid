@@ -14,7 +14,9 @@ namespace Arkanoid.GameObjects
         public Point size;
         protected Point startPosition;
         public Point position;
+        public Point prevPosition;
         public ConsoleColor color;
+        public bool isRemoved = false;
 
         public void updateBorder()
         {
@@ -29,6 +31,7 @@ namespace Arkanoid.GameObjects
         {
             this.size = size;
             this.position = position;
+            this.prevPosition = position;
             this.startPosition = position;
         }
 
@@ -60,9 +63,11 @@ namespace Arkanoid.GameObjects
 
         public virtual string draw() { return ""; }
 
+        public virtual string clear() { return ""; }
         protected void centerPosition (){
             position.X = position.X + size.X / 2;
             position.Y = position.Y + size.Y / 2;
+            this.prevPosition = position;
         }
     }
 }

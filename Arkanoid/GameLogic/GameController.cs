@@ -28,6 +28,34 @@ namespace Arkanoid.GameLogic
 
         public KeyFlags getKeyFlags() => flags;
 
-     
+        public void update()
+        {
+            if (Console.KeyAvailable)
+            {
+                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                if (keyInfo.Key == ConsoleKey.RightArrow)
+                {
+                    flags.isPressedRight = true;
+                    flags.isPressedLeft = false;
+                    flags.isPressedSpace = false;
+                }
+                if (keyInfo.Key == ConsoleKey.LeftArrow)
+                {
+                    flags.isPressedRight = false;
+                    flags.isPressedLeft = true;
+                    flags.isPressedSpace = false;
+                }
+                if(keyInfo.Key == ConsoleKey.Spacebar) {
+                    flags.isPressedRight = false;
+                    flags.isPressedLeft = false;
+                    flags.isPressedSpace = true;
+                }
+            }
+            else {
+                flags.isPressedLeft = false;
+                flags.isPressedSpace = false;
+                flags.isPressedRight = false;
+            }
+        }
     }
 }
