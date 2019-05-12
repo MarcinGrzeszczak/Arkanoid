@@ -1,5 +1,4 @@
 ﻿using Arkanoid.GameLogic;
-using System.Windows;
 
 namespace Arkanoid.GameObjects
 {
@@ -20,6 +19,8 @@ namespace Arkanoid.GameObjects
         public MovingGameObject(Point size, Point position) : base(size, position) { }
 
         public virtual void restartPosition(){
+
+            prevPosition = new Point(position.X, position.Y);
             position = startPosition;
             
         }
@@ -37,7 +38,7 @@ namespace Arkanoid.GameObjects
 
         private void updatePosition()
         {
-            prevPosition = position;
+            prevPosition.copy(position);
             position.X += acceleration[0];
             position.Y += acceleration[1];
         }

@@ -67,7 +67,7 @@ namespace Arkanoid.GameObjects
         protected void centerPosition (){
             position.X = position.X + size.X / 2;
             position.Y = position.Y + size.Y / 2;
-            this.prevPosition = position;
+            //this.prevPosition = position;
         }
     }
 }

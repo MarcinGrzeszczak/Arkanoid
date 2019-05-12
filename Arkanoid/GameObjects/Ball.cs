@@ -5,7 +5,7 @@ namespace Arkanoid.GameObjects
 {
     class Ball : MovingGameObject {
 
-        private static double DEFAULT_SPEED = 15;
+        private static double DEFAULT_SPEED = 10;
         private Random rand;
         public static Point DEFAULT_SIZE = new Point(1, 1);
         public bool isSticked;

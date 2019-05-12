@@ -2,7 +2,6 @@
 using Arkanoid.GameObjects;
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 
 
 namespace Arkanoid
@@ -21,15 +20,14 @@ namespace Arkanoid
             this.controller = controller;
             this.endGameCallback = endGameCallback;
 
-            GameBorder border = new GameBorder(new Point(Console.WindowWidth, Console.WindowHeight), new Point(0, 0));
+            GameBorder border = new GameBorder(new Point(41, 17), new Point(0, 0));
             
             level = new GameLevel();
             gameState = new GameState(border);
         }
 
-        private void loop(double fps)
+        private void loop(int delay)
         {
-            double delay = 1000 / fps;
             refreshConsole(true);
             while (isRunning)
             {
@@ -38,7 +36,12 @@ namespace Arkanoid
                 gameState.update(delay, controller.getKeyFlags());
                 refreshConsole();
 
-                Thread.Sleep(60);
+                if (gameState.endgame) {
+                    isRunning = false;
+                    GameDrawing.endgame(gameState.isWin, gameState.score);
+                }
+
+                Thread.Sleep(delay);
             }
         }
 

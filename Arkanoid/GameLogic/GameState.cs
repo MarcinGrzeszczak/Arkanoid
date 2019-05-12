@@ -2,7 +2,7 @@
 using Arkanoid.GameObjects;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
+
 using static Arkanoid.GameObjects.GameObject;
 
 namespace Arkanoid
@@ -16,6 +16,7 @@ namespace Arkanoid
         private Player player;
         private Ball ball;
         public int currentLives;
+        private bool isRoundLost;
         public bool endgame;
         public bool isWin;
         public int score;
@@ -33,6 +34,7 @@ namespace Arkanoid
         }
 
         private void loseLive(){
+            isRoundLost = true;
             ball.isSticked = true;
             ball.restartPosition();
             player.restartPosition();
@@ -64,6 +66,7 @@ namespace Arkanoid
                 else
                     ball.reactToCollision(isCollidedWithBorder);
 
+
                 for (int brickIndex = 0; brickIndex < bricks.Count; ++brickIndex) {
                     if (bricks[brickIndex].isRemoved)
                         bricks.RemoveAt(brickIndex);
@@ -90,9 +93,13 @@ namespace Arkanoid
             if (controllerKeyFlags.isPressedSpace && ball.isSticked)
                 ball.throwBall();
 
-           
-            ball.update(delta);
-            player.update(delta);
+            if (!isRoundLost)
+            {
+                ball.update(delta);
+                player.update(delta);
+            }
+            else
+                isRoundLost = false;
 
         }
 

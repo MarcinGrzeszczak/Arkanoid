@@ -6,7 +6,7 @@ namespace Arkanoid.GameObjects
 {
     class Player : MovingGameObject
     {
-        public static double DEFAULT_SPEED = 13;
+        public static double DEFAULT_SPEED = 15;
         public static Point DEFAULT_SIZE = new Point(5, 1);
         private static string block = "▀";
         public Player(Point size, Point position) : base(size, position) {
@@ -19,7 +19,7 @@ namespace Arkanoid.GameObjects
 
         private void init() {
             color = System.ConsoleColor.White;
-            //centerPosition();
+            centerPosition();
             speed = DEFAULT_SPEED;
         }
 
@@ -41,7 +41,7 @@ namespace Arkanoid.GameObjects
         public override void restartPosition()
         {
             base.restartPosition();
-            //centerPosition();
+            centerPosition();
         }
 
         public override void reactToCollision(Collision collision) {

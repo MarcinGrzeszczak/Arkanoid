@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Arkanoid.GameLogic
 {
     struct Point
@@ -19,6 +14,11 @@ namespace Arkanoid.GameLogic
             if (this.X == point.X && this.Y == point.Y)
                 return true;
             return false;
+        }
+
+        public void copy (Point point){
+            this.X = point.X;
+            this.Y = point.Y;
         }
     };
 }

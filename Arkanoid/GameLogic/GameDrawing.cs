@@ -1,6 +1,6 @@
 ﻿using Arkanoid.GameObjects;
 using System;
-using System.Collections.Generic;
+
 
 namespace Arkanoid
 {
@@ -25,6 +25,27 @@ namespace Arkanoid
                 Console.Write(gameObject.draw());
                 Console.ResetColor();
             }
+        }
+
+
+        public static void endgame(bool isWon, int score) {
+            Console.Clear();
+            Console.SetCursorPosition(5, 3);
+            Console.Write("************************");
+
+            for(int i=0; i <7; ++i){
+                Console.SetCursorPosition(5, 3+i);
+                Console.Write('*');
+                Console.SetCursorPosition(28, 3 + i);
+                Console.Write('*');
+            }
+            Console.SetCursorPosition(12, 5);
+            Console.Write("Game Over!");
+            Console.SetCursorPosition(10, 8);
+            Console.Write("Your score : "+score);
+            Console.SetCursorPosition(5, 10);
+            Console.Write("************************");
+            Console.ReadKey();
         }
     }
 }
